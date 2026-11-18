@@ -39,56 +39,56 @@ static const char *const set[CS_IC_N][2] = {
   { "GOTO",      ">ci R 7 1 14 15 cw F 8 2 13 14 ca L 1 8 10 8 L 7 5 10 8 L 7 11 10 8" },          /* an arrow to a page */
   { "CLEAR",      "ci L 1 12 4 3 L 4 3 7 12 L 2 9 6 9 cr F 9 10 14 14 cw L 10 13 13 11" },         /* A and an eraser */
   /* ---- text */
-  { "BOLD",       "B B" },
-  { "ITALIC",     "I I" },
-  { "UNDERLINE",  "U U" },
+  { "BOLD",       "B B" },                                                                                     /* B in the bold interface font */
+  { "ITALIC",     "I I" },                                                                                     /* I, slanted */
+  { "UNDERLINE",  "U U" },                                                                                     /* U, underlined */
   { "FONT",       "ci L 1 12 5 2 L 5 2 9 12 L 3 8 7 8 ca R 10 10 15 15 L 12 12 15 15 L 15 12 15 15 L 12 15 15 15" },   /* A and the dialog's corner */
   { "GROW",       "ci L 1 14 5 4 L 5 4 9 14 L 3 10 7 10 ca L 11 5 13 2 L 13 2 15 5" },             /* A and up */
   { "SHRINK",     "ci L 1 14 5 4 L 5 4 9 14 L 3 10 7 10 ca L 11 2 13 5 L 13 5 15 2" },             /* A and down */
   { "CASE",       "ci L 1 13 4 4 L 4 4 7 13 L 2 10 6 10 O 11 11 2 L 13 9 13 13" },                 /* Aa */
-  { "ALIGNLEFT",  "ci L 1 2 14 2 L 1 5 10 5 L 1 8 14 8 L 1 11 10 11 L 1 14 12 14" },
-  { "ALIGNCENTRE","ci L 1 2 14 2 L 3 5 12 5 L 1 8 14 8 L 3 11 12 11 L 2 14 13 14" },
-  { "ALIGNRIGHT", "ci L 1 2 14 2 L 5 5 14 5 L 1 8 14 8 L 5 11 14 11 L 3 14 14 14" },
-  { "JUSTIFY",    "ci L 1 2 14 2 L 1 5 14 5 L 1 8 14 8 L 1 11 14 11 L 1 14 9 14" },
-  { "BULLETS",   ">ci E 2 3 1 E 2 8 1 E 2 13 1 L 5 3 14 3 L 5 8 14 8 L 5 13 14 13" },
-  { "NUMBERS",    "ca L 2 1 2 5 L 1 8 3 8 L 3 8 1 11 L 1 11 3 11 ci L 6 3 14 3 L 6 8 14 8 L 6 13 14 13" },
-  { "INDENT",    ">ci L 1 2 14 2 L 7 6 14 6 L 7 10 14 10 L 1 14 14 14 ca P 3 1 5 4 8 1 11" },
-  { "OUTDENT",   ">ci L 1 2 14 2 L 7 6 14 6 L 7 10 14 10 L 1 14 14 14 ca P 3 4 5 1 8 4 11" },
-  { "SORT",       "ca L 1 2 4 2 L 1 2 4 6 L 1 6 4 6 ci L 11 1 11 14 L 9 12 11 14 L 13 12 11 14 ca L 1 10 4 10 L 2 10 2 14 L 1 14 4 14" },
+  { "ALIGNLEFT",  "ci L 1 2 14 2 L 1 5 10 5 L 1 8 14 8 L 1 11 10 11 L 1 14 12 14" },                           /* lines flush left */
+  { "ALIGNCENTRE","ci L 1 2 14 2 L 3 5 12 5 L 1 8 14 8 L 3 11 12 11 L 2 14 13 14" },                           /* lines centred */
+  { "ALIGNRIGHT", "ci L 1 2 14 2 L 5 5 14 5 L 1 8 14 8 L 5 11 14 11 L 3 14 14 14" },                           /* lines flush right */
+  { "JUSTIFY",    "ci L 1 2 14 2 L 1 5 14 5 L 1 8 14 8 L 1 11 14 11 L 1 14 9 14" },                            /* lines flush both sides, the last short */
+  { "BULLETS",   ">ci E 2 3 1 E 2 8 1 E 2 13 1 L 5 3 14 3 L 5 8 14 8 L 5 13 14 13" },                          /* three dots and their lines */
+  { "NUMBERS",    "ca L 2 1 2 5 L 1 8 3 8 L 3 8 1 11 L 1 11 3 11 ci L 6 3 14 3 L 6 8 14 8 L 6 13 14 13" },     /* 1, 2, 3 in the accent and their lines */
+  { "INDENT",    ">ci L 1 2 14 2 L 7 6 14 6 L 7 10 14 10 L 1 14 14 14 ca P 3 1 5 4 8 1 11" },                  /* lines moved in, an arrow pointing in */
+  { "OUTDENT",   ">ci L 1 2 14 2 L 7 6 14 6 L 7 10 14 10 L 1 14 14 14 ca P 3 4 5 1 8 4 11" },                  /* lines moved out, an arrow pointing out */
+  { "SORT",       "ca L 1 2 4 2 L 1 2 4 6 L 1 6 4 6 ci L 11 1 11 14 L 9 12 11 14 L 13 12 11 14 ca L 1 10 4 10 L 2 10 2 14 L 1 14 4 14" }, /* A over Z beside a down arrow */
   { "WRAP",      ">ci L 1 3 14 3 L 1 8 11 8 L 1 13 6 13 ca P 4 11 8 14 8 14 12 9 12 L 9 12 11 10 L 9 12 11 14" },   /* lines with a return arrow */
-  { "SPELLING",   "ci B abc cg L 5 12 8 15 L 8 15 14 8" },
-  { "WORDCOUNT",  "ci R 1 1 14 14 ca B 123" },
+  { "SPELLING",   "ci B abc cg L 5 12 8 15 L 8 15 14 8" },                                                     /* abc and a green tick */
+  { "WORDCOUNT",  "ci R 1 1 14 14 ca B 123" },                                                                 /* 123 in a box */
   /* ---- insert */
   { "DATE",       "ci R 1 3 14 14 F 1 3 14 5 L 4 1 4 3 L 11 1 11 3 ca F 4 8 5 9 F 7 8 8 9 F 10 8 11 9 F 4 11 5 12 F 7 11 8 12" },   /* a calendar */
   { "TIME",       "ci O 8 8 6 ca L 8 8 8 4 L 8 8 11 10" },                                        /* a clock */
   { "SYMBOL",     "ci O 7 6 4 L 3 13 5 13 L 9 13 12 13 L 5 10 5 13 L 9 10 9 13" },               /* omega */
   { "PICTURE",    "ci R 1 2 14 13 ca E 5 6 2 cg P 5 2 12 6 8 9 10 12 7 14 12" },                  /* sun over hills */
-  { "TABLE",      "ci R 1 2 14 14 ca F 2 3 13 5 ci L 1 6 14 6 L 1 10 14 10 L 5 6 5 14 L 10 6 10 14" },
+  { "TABLE",      "ci R 1 2 14 14 ca F 2 3 13 5 ci L 1 6 14 6 L 1 10 14 10 L 5 6 5 14 L 10 6 10 14" },         /* a grid with its heading row in the accent */
   { "LINK",       "ci R 1 5 9 11 R 2 6 8 10 ca R 7 5 15 11 R 8 6 14 10" },                        /* two links of a chain */
   { "COMMENT",    "ci R 1 2 14 11 L 4 11 4 14 L 4 14 7 11 ca L 4 5 11 5 L 4 8 9 8" },              /* a speech balloon */
-  { "PAGEBREAK",  "ci R 3 1 12 6 R 3 10 12 15 cd L 1 8 3 8 L 5 8 7 8 L 9 8 11 8 L 13 8 15 8" },
+  { "PAGEBREAK",  "ci R 3 1 12 6 R 3 10 12 15 cd L 1 8 3 8 L 5 8 7 8 L 9 8 11 8 L 13 8 15 8" },                /* two pages and a dashed line between */
   { "BOOKMARK",   "ca F 5 2 11 9 P 6 4 1 12 1 12 15 8 11 4 15 4 1" },                              /* a ribbon marker */
   /* ---- view */
-  { "ZOOMIN",     "ci O 6 6 4 L 9 9 14 14 ca L 4 6 8 6 L 6 4 6 8" },
-  { "ZOOMOUT",    "ci O 6 6 4 L 9 9 14 14 ca L 4 6 8 6" },
-  { "ZOOM100",    "ci R 3 1 12 15 ca B 1" },
+  { "ZOOMIN",     "ci O 6 6 4 L 9 9 14 14 ca L 4 6 8 6 L 6 4 6 8" },                                           /* a magnifier with a plus */
+  { "ZOOMOUT",    "ci O 6 6 4 L 9 9 14 14 ca L 4 6 8 6" },                                                     /* a magnifier with a minus */
+  { "ZOOM100",    "ci R 3 1 12 15 ca B 1" },                                                                   /* a page with 1 on it */
   { "PANE",      ">ci R 1 2 14 13 ca F 2 3 5 12 cd L 7 5 12 5 L 7 8 12 8 L 7 11 10 11" },          /* a window with a side pane */
   { "STATUSBAR",  "ci R 1 2 14 13 ca F 2 10 13 12 cd L 3 5 12 5 L 3 7 10 7" },                    /* a window with a bar along its foot */
-  { "RULER",      "ci R 1 5 14 10 L 3 5 3 7 L 6 5 6 8 L 9 5 9 7 L 12 5 12 8" },
-  { "LINENUM",    "ca B 1 ci L 7 4 15 4 L 7 8 15 8 L 7 12 13 12 cd L 1 8 4 8 L 1 12 4 12" },
-  { "FULLSCREEN", "ci L 1 4 1 1 L 1 1 4 1 L 11 1 14 1 L 14 1 14 4 L 14 11 14 14 L 14 14 11 14 L 4 14 1 14 L 1 14 1 11 ca L 4 7 11 7" },
+  { "RULER",      "ci R 1 5 14 10 L 3 5 3 7 L 6 5 6 8 L 9 5 9 7 L 12 5 12 8" },                                /* a ruler with its ticks */
+  { "LINENUM",    "ca B 1 ci L 7 4 15 4 L 7 8 15 8 L 7 12 13 12 cd L 1 8 4 8 L 1 12 4 12" },                   /* a 1 beside lines */
+  { "FULLSCREEN", "ci L 1 4 1 1 L 1 1 4 1 L 11 1 14 1 L 14 1 14 4 L 14 11 14 14 L 14 14 11 14 L 4 14 1 14 L 1 14 1 11 ca L 4 7 11 7" }, /* four corners and a line: the window opened out */
   { "DARK",       "ci O 8 8 6 E 8 8 5 cw E 10 6 4" },                                             /* a crescent moon */
   { "LANGUAGE",   "ci O 8 8 6 L 2 8 14 8 L 8 2 8 14 ca P 4 8 2 5 5 5 11 8 14 P 4 8 2 11 5 11 11 8 14" },   /* a globe */
-  { "HELP",       "ca O 8 8 6 ci L 6 6 7 5 L 7 5 9 5 L 9 5 10 6 L 10 6 8 8 L 8 8 8 10 F 8 12 8 12" },
+  { "HELP",       "ca O 8 8 6 ci L 6 6 7 5 L 7 5 9 5 L 9 5 10 6 L 10 6 8 8 L 8 8 8 10 F 8 12 8 12" },          /* ? in an accent ring */
   { "SEARCH",     "cd O 6 6 4 L 9 9 13 13" },                                                    /* the Tell Me box's magnifier */
   /* ---- arrows and marks */
-  { "ARROWDOWN",  "ci L 4 6 8 10 L 8 10 12 6" },
-  { "ARROWUP",    "ci L 4 10 8 6 L 8 6 12 10" },
-  { "ARROWLEFT",  "ci L 10 4 6 8 L 6 8 10 12" },
-  { "ARROWRIGHT", "ci L 6 4 10 8 L 10 8 6 12" },
-  { "TICK",       "cg L 3 8 6 11 L 6 11 13 4" },
-  { "CROSS",      "ci L 4 4 11 11 L 11 4 4 11" },
-  { "PIN",        "ci L 8 9 8 15 R 5 2 10 6 L 3 9 12 9 L 5 6 4 9 L 10 6 11 9" },
+  { "ARROWDOWN",  "ci L 4 6 8 10 L 8 10 12 6" },                                                               /* a chevron down (drop-down arrows) */
+  { "ARROWUP",    "ci L 4 10 8 6 L 8 6 12 10" },                                                               /* a chevron up */
+  { "ARROWLEFT",  "ci L 10 4 6 8 L 6 8 10 12" },                                                               /* a chevron left */
+  { "ARROWRIGHT", "ci L 6 4 10 8 L 10 8 6 12" },                                                               /* a chevron right */
+  { "TICK",       "cg L 3 8 6 11 L 6 11 13 4" },                                                               /* a green tick */
+  { "CROSS",      "ci L 4 4 11 11 L 11 4 4 11" },                                                              /* an x (close boxes) */
+  { "PIN",        "ci L 8 9 8 15 R 5 2 10 6 L 3 9 12 9 L 5 6 4 9 L 10 6 11 9" },                               /* a drawing pin */
   { "MORE",       "ci F 2 7 3 8 F 7 7 8 8 F 12 7 13 8" },                                         /* three dots */
   { "WARNING",    "co P 4 8 1 15 14 1 14 8 1 ci F 8 5 8 10 F 8 12 8 12" },                        /* a triangle with ! */
   { "STOP",       "cr E 8 8 6 cw F 4 7 12 9" },                                                  /* a red disc with a bar */
