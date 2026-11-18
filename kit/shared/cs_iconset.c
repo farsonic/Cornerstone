@@ -177,8 +177,8 @@ int cs_icon_run(const char *src, const CsIconOps *o, int mirror)
 /* a check run: every number kept in 0..15 (a circle's centre and radius kept inside too) */
 struct Chk { int bad; };
 static void ck_line(void *c, int a, int b, int e, int f) { if (a < 0 || a > 15 || b < 0 || b > 15 || e < 0 || e > 15 || f < 0 || f > 15) ((struct Chk *)c)->bad = 1; }
-static void ck_box(void *c, int a, int b, int e, int f, int fl) { (void)fl; ck_line(c, a, b, e, f); if (b > f) ((struct Chk *)c)->bad = 1; }
-static void ck_circle(void *c, int x, int y, int r, int fl) { (void)fl; if (r < 0 || x - r < 0 || x + r > 15 || y - r < 0 || y + r > 15) ((struct Chk *)c)->bad = 1; }
+static void ck_box(void *c, int a, int b, int e, int f, int fl) { ck_line(c, a, b, e, f); if (b > f || fl < 0) ((struct Chk *)c)->bad = 1; }
+static void ck_circle(void *c, int x, int y, int r, int fl) { if (fl < 0 || r < 0 || x - r < 0 || x + r > 15 || y - r < 0 || y + r > 15) ((struct Chk *)c)->bad = 1; }
 static void ck_poly(void *c, const int *xy, int n) { int i; for (i = 0; i < n; i++) ck_line(c, xy[2 * i], xy[2 * i + 1], xy[2 * i], xy[2 * i + 1]); }
 int cs_icon_check(const char *src)
 {

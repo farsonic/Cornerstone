@@ -23,7 +23,8 @@ struct MUI_CustomClass *cs_ribbon_class(void);
 #define MUIA_CsRibbon_Def      CS_TAG(0x100)   /* (init) const CsRibbonDef * */
 #define MUIA_CsRibbon_Tab      CS_TAG(0x101)   /* (set, get, notify) the tab shown, an index into def->tabs */
 #define MUIA_CsRibbon_Command  CS_TAG(0x102)   /* (notify) a command chosen: its id (set each time) */
-#define MUIA_CsRibbon_Value    CS_TAG(0x103)   /* (get) the list entry that came with the command, -1 none */
+#define MUIA_CsRibbon_Value    CS_TAG(0x103)   /* (get, set) the list entry that came with the command, -1
+                                                  none: read it, then set it back to -1 */
 #define MUIA_CsRibbon_Minimised CS_TAG(0x104)  /* (set, get) only the tab strip shown */
 #define MUIM_CsRibbon_Refresh  CS_TAG(0x110)   /* states changed: redraw what differs (and re-lay out
                                                   if a contextual tab came or went) */

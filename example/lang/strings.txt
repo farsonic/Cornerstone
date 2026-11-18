@@ -1,0 +1,166 @@
+# lang/strings.txt - Jotter's interface words, in English, German, French, Spanish and Italian.
+# kit/shared/tools/mklang.py makes amiga/lang_table.h from this file and the kit's own
+# (kit/shared/lang/kit-strings.txt); kit/shared/tools/langcheck.py checks the source against both.
+# One row per English string, five columns split by a TAB: the English exactly as the C source has
+# it, then German, French, Spanish, Italian. UTF-8, but only Latin-1 letters. "-" is "as English".
+# The terms are Microsoft Word's and Notepad's in each language (Datei/Fichier/Archivo/File,
+# Zwischenablage/Presse-papiers/Portapapeles/Appunti...). German runs about a third longer than
+# English: keep ribbon labels short (kit/amiga/tools/ribbonfit.py checks they fit 640 pixels).
+#
+# Adding a string: write it in English in the source inside tr() (or where it is translated when
+# shown: menus, ribbon labels, the command table), run langcheck.py --rows, paste its row here
+# under the right section, translate the four columns, run mklang.py.
+
+## ui/commands.c: the command table
+New	Neu	Nouveau	Nuevo	Nuovo
+Starts a new, empty document.	Beginnt ein neues, leeres Dokument.	Commence un nouveau document vide.	Empieza un documento nuevo y vacío.	Inizia un nuovo documento vuoto.
+Open...	Öffnen...	Ouvrir...	Abrir...	Apri...
+Opens a text file from disk.	Öffnet eine Textdatei vom Datenträger.	Ouvre un fichier texte depuis le disque.	Abre un archivo de texto del disco.	Apre un file di testo dal disco.
+Save	Speichern	Enregistrer	Guardar	Salva
+Saves the document under its name.	Speichert das Dokument unter seinem Namen.	Enregistre le document sous son nom.	Guarda el documento con su nombre.	Salva il documento con il suo nome.
+Save As...	Speichern unter...	Enregistrer sous...	Guardar como...	Salva con nome...
+Saves the document under a new name.	Speichert das Dokument unter einem neuen Namen.	Enregistre le document sous un nouveau nom.	Guarda el documento con un nombre nuevo.	Salva il documento con un nuovo nome.
+Revert	Zurücksetzen	Rétablir l'original	Revertir	Ripristina
+Puts the document back as it was last saved.	Setzt das Dokument auf den zuletzt gespeicherten Stand zurück.	Remet le document tel qu'il était au dernier enregistrement.	Devuelve el documento a como estaba la última vez que se guardó.	Riporta il documento com'era all'ultimo salvataggio.
+Info	Informationen	Informations	Información	Informazioni
+Shows the document's name, size and counts.	Zeigt Namen, Größe und Zählungen des Dokuments.	Affiche le nom, la taille et les statistiques du document.	Muestra el nombre, el tamaño y los recuentos del documento.	Mostra nome, dimensioni e conteggi del documento.
+Options...	Optionen...	Options...	Opciones...	Opzioni...
+The interface's language, theme and text size.	Sprache, Design und Textgröße der Oberfläche.	La langue, le thème et la taille du texte de l'interface.	El idioma, el tema y el tamaño del texto de la interfaz.	Lingua, tema e dimensione del testo dell'interfaccia.
+About Jotter...	Über Jotter...	À propos de Jotter...	Acerca de Jotter...	Informazioni su Jotter...
+Jotter's version and licence.	Version und Lizenz von Jotter.	La version et la licence de Jotter.	La versión y la licencia de Jotter.	Versione e licenza di Jotter.
+Quit	Beenden	Quitter	Salir	Esci
+Ends Jotter (it asks first if there are changes).	Beendet Jotter (fragt vorher, wenn es Änderungen gibt).	Quitte Jotter (en demandant d'abord s'il y a des modifications).	Cierra Jotter (pregunta antes si hay cambios).	Chiude Jotter (chiede prima se ci sono modifiche).
+New, Open, Save, Info and Options, on a page of their own.	Neu, Öffnen, Speichern, Informationen und Optionen auf einer eigenen Seite.	Nouveau, Ouvrir, Enregistrer, Informations et Options, sur une page à part.	Nuevo, Abrir, Guardar, Información y Opciones, en una página propia.	Nuovo, Apri, Salva, Informazioni e Opzioni, in una pagina a parte.
+Undo	Rückgängig	Annuler	Deshacer	Annulla
+Takes back the last change.	Macht die letzte Änderung rückgängig.	Annule la dernière modification.	Deshace el último cambio.	Annulla l'ultima modifica.
+Redo	Wiederholen	Rétablir	Rehacer	Ripeti
+Does again what Undo took back.	Stellt wieder her, was Rückgängig zurückgenommen hat.	Refait ce qu'Annuler a défait.	Vuelve a hacer lo que Deshacer deshizo.	Rifà ciò che Annulla ha annullato.
+Cut	Ausschneiden	Couper	Cortar	Taglia
+Moves the selected text to the clipboard.	Verschiebt den markierten Text in die Zwischenablage.	Déplace le texte sélectionné dans le Presse-papiers.	Mueve el texto seleccionado al Portapapeles.	Sposta il testo selezionato negli Appunti.
+Copy	Kopieren	Copier	Copiar	Copia
+Copies the selected text to the clipboard.	Kopiert den markierten Text in die Zwischenablage.	Copie le texte sélectionné dans le Presse-papiers.	Copia el texto seleccionado al Portapapeles.	Copia il testo selezionato negli Appunti.
+Paste	Einfügen	Coller	Pegar	Incolla
+Puts in the text the clipboard holds.	Fügt den Text aus der Zwischenablage ein.	Insère le texte du Presse-papiers.	Inserta el texto del Portapapeles.	Inserisce il testo degli Appunti.
+Delete	Löschen	Supprimer	Eliminar	Elimina
+Removes the selected text.	Entfernt den markierten Text.	Supprime le texte sélectionné.	Quita el texto seleccionado.	Rimuove il testo selezionato.
+Select All	Alles markieren	Sélectionner tout	Seleccionar todo	Seleziona tutto
+Selects the whole document.	Markiert das ganze Dokument.	Sélectionne tout le document.	Selecciona todo el documento.	Seleziona tutto il documento.
+Find...	Suchen...	Rechercher...	Buscar...	Trova...
+Looks for words in the document.	Sucht Wörter im Dokument.	Recherche des mots dans le document.	Busca palabras en el documento.	Cerca parole nel documento.
+Find Next	Weitersuchen	Suivant	Buscar siguiente	Trova successivo
+Finds the next place the words are.	Sucht die nächste Stelle mit den Wörtern.	Trouve l'endroit suivant où sont les mots.	Busca el siguiente lugar donde están las palabras.	Trova il punto successivo in cui sono le parole.
+Find Previous	Vorheriges suchen	Précédent	Buscar anterior	Trova precedente
+Finds the place before.	Sucht die Stelle davor.	Trouve l'endroit précédent.	Busca el lugar anterior.	Trova il punto precedente.
+Replace...	Ersetzen...	Remplacer...	Reemplazar...	Sostituisci...
+Puts other words in place of the ones found.	Setzt andere Wörter an die Stelle der gefundenen.	Met d'autres mots à la place de ceux trouvés.	Pone otras palabras en lugar de las encontradas.	Mette altre parole al posto di quelle trovate.
+Go To Line...	Gehe zu Zeile...	Atteindre la ligne...	Ir a la línea...	Vai alla riga...
+Moves to a line by its number.	Springt zu einer Zeile mit ihrer Nummer.	Va à une ligne par son numéro.	Va a una línea por su número.	Va a una riga con il suo numero.
+UPPER CASE	GROSSBUCHSTABEN	MAJUSCULES	MAYÚSCULAS	MAIUSCOLE
+Makes the selected letters capitals.	Macht die markierten Buchstaben zu Großbuchstaben.	Met les lettres sélectionnées en majuscules.	Pone en mayúsculas las letras seleccionadas.	Rende maiuscole le lettere selezionate.
+lower case	kleinbuchstaben	minuscules	minúsculas	minuscole
+Makes the selected letters small.	Macht die markierten Buchstaben zu Kleinbuchstaben.	Met les lettres sélectionnées en minuscules.	Pone en minúsculas las letras seleccionadas.	Rende minuscole le lettere selezionate.
+Sort Lines	Zeilen sortieren	Trier les lignes	Ordenar líneas	Ordina righe
+Puts the selected lines (or all) in alphabetical order.	Bringt die markierten Zeilen (oder alle) in alphabetische Reihenfolge.	Met les lignes sélectionnées (ou toutes) dans l'ordre alphabétique.	Pone las líneas seleccionadas (o todas) en orden alfabético.	Mette le righe selezionate (o tutte) in ordine alfabetico.
+Indent	Einzug vergrößern	Augmenter le retrait	Aumentar sangría	Aumenta rientro
+Moves the selected lines in by two spaces.	Rückt die markierten Zeilen um zwei Leerzeichen ein.	Décale les lignes sélectionnées de deux espaces vers l'intérieur.	Mete las líneas seleccionadas dos espacios.	Sposta le righe selezionate di due spazi verso l'interno.
+Outdent	Einzug verkleinern	Diminuer le retrait	Disminuir sangría	Riduci rientro
+Moves the selected lines out by two spaces.	Rückt die markierten Zeilen um zwei Leerzeichen aus.	Décale les lignes sélectionnées de deux espaces vers l'extérieur.	Saca las líneas seleccionadas dos espacios.	Sposta le righe selezionate di due spazi verso l'esterno.
+Date	Datum	Date	Fecha	Data
+Puts in today's date.	Fügt das heutige Datum ein.	Insère la date du jour.	Inserta la fecha de hoy.	Inserisce la data di oggi.
+Time	Uhrzeit	Heure	Hora	Ora
+Puts in the time now.	Fügt die aktuelle Uhrzeit ein.	Insère l'heure actuelle.	Inserta la hora actual.	Inserisce l'ora attuale.
+Heading	Überschrift	Titre	Título	Titolo
+Makes the line a heading (# at its start): headings are listed in the Outline pane.	Macht die Zeile zur Überschrift (# am Anfang): Überschriften stehen im Gliederungsbereich.	Fait de la ligne un titre (# au début) : les titres sont listés dans le volet Plan.	Convierte la línea en título (# al principio): los títulos se listan en el panel Esquema.	Rende la riga un titolo (# all'inizio): i titoli sono elencati nel riquadro Struttura.
+Line	Linie	Ligne	Línea	Linea
+Puts in a line of dashes across.	Fügt eine Linie aus Strichen ein.	Insère une ligne de tirets.	Inserta una línea de guiones.	Inserisce una linea di trattini.
+Outline Pane	Gliederungsbereich	Volet Plan	Panel Esquema	Riquadro Struttura
+Shows or hides the list of headings beside the text.	Zeigt oder verbirgt die Liste der Überschriften neben dem Text.	Affiche ou masque la liste des titres à côté du texte.	Muestra u oculta la lista de títulos junto al texto.	Mostra o nasconde l'elenco dei titoli accanto al testo.
+Status Bar	Statusleiste	Barre d'état	Barra de estado	Barra di stato
+Shows or hides the bar at the window's foot.	Zeigt oder verbirgt die Leiste am unteren Fensterrand.	Affiche ou masque la barre au bas de la fenêtre.	Muestra u oculta la barra al pie de la ventana.	Mostra o nasconde la barra in fondo alla finestra.
+Word Wrap	Zeilenumbruch	Retour automatique à la ligne	Ajuste de línea	A capo automatico
+Breaks long lines at the window's edge (only on screen: the file keeps its lines).	Bricht lange Zeilen am Fensterrand um (nur auf dem Bildschirm: die Datei behält ihre Zeilen).	Coupe les longues lignes au bord de la fenêtre (à l'écran seulement : le fichier garde ses lignes).	Divide las líneas largas en el borde de la ventana (solo en pantalla: el archivo conserva sus líneas).	Spezza le righe lunghe al bordo della finestra (solo sullo schermo: il file mantiene le sue righe).
+Text Size	Textgröße	Taille du texte	Tamaño del texto	Dimensione testo
+The size of the document's letters.	Die Größe der Buchstaben des Dokuments.	La taille des lettres du document.	El tamaño de las letras del documento.	La dimensione delle lettere del documento.
+Dark Theme	Dunkles Design	Thème sombre	Tema oscuro	Tema scuro
+Light letters on a dark background, or the other way round.	Helle Schrift auf dunklem Grund, oder umgekehrt.	Lettres claires sur fond sombre, ou l'inverse.	Letras claras sobre fondo oscuro, o al revés.	Lettere chiare su sfondo scuro, o viceversa.
+Collapse the Ribbon	Menüband reduzieren	Réduire le ruban	Contraer la cinta de opciones	Comprimi la barra multifunzione
+Only the ribbon's tabs are shown; click a tab to see its tools.	Nur die Registerkarten des Menübands werden gezeigt; ein Klick auf eine Karte zeigt ihre Befehle.	Seuls les onglets du ruban sont affichés ; cliquez sur un onglet pour voir ses outils.	Solo se muestran las pestañas de la cinta; haga clic en una para ver sus herramientas.	Sono mostrate solo le schede della barra; fare clic su una scheda per vederne gli strumenti.
+Tell Me...	Sie wünschen...	Dites-nous...	Dígame...	Dimmi...
+Type what you want to do, and Jotter finds the command.	Tippen Sie ein, was Sie tun möchten, und Jotter findet den Befehl.	Tapez ce que vous voulez faire, et Jotter trouve la commande.	Escriba lo que quiere hacer y Jotter encuentra el comando.	Scrivete che cosa volete fare e Jotter trova il comando.
+Show KeyTips	Zugriffstasten zeigen	Afficher les info-bulles de touches	Mostrar sugerencias de teclas	Mostra suggerimenti tasti
+A letter on each tab and tool: type it to choose the tool (also F10, or Alt).	Ein Buchstabe auf jeder Karte und jedem Befehl: Tippen Sie ihn, um den Befehl zu wählen (auch F10 oder Alt).	Une lettre sur chaque onglet et outil : tapez-la pour choisir l'outil (aussi F10, ou Alt).	Una letra en cada pestaña y herramienta: escríbala para elegir la herramienta (también F10, o Alt).	Una lettera su ogni scheda e strumento: digitatela per scegliere lo strumento (anche F10, o Alt).
+## ui/commands.c: menus, ribbon tabs, groups, labels and lists
+Edit	Bearbeiten	Édition	Edición	Modifica
+Lines	Zeilen	Lignes	Líneas	Righe
+Insert	Einfügen	Insertion	Insertar	Inserisci
+View	Ansicht	Affichage	Vista	Visualizza
+Home	Start	Accueil	Inicio	Home
+Clipboard	Zwischenablage	Presse-papiers	Portapapeles	Appunti
+Editing	Bearbeiten	Modification	Edición	Modifica
+Find	Suchen	Rechercher	Buscar	Trova
+Replace	Ersetzen	Remplacer	Reemplazar	Sostituisci
+Go To	Gehe zu	Atteindre	Ir a	Vai a
+Date & Time	Datum & Uhrzeit	Date et heure	Fecha y hora	Data e ora
+Text	Text	Texte	Texto	Testo
+Show	Anzeigen	Afficher	Mostrar	Mostra
+Look	Aussehen	Apparence	Aspecto	Aspetto
+Dark	Dunkel	Sombre	Oscuro	Scuro
+Ribbon	Menüband	Ruban	Cinta	Barra
+Collapse	Reduzieren	Réduire	Contraer	Comprimi
+KeyTips	Zugriffstasten	Touches	Teclas	Tasti
+Small	Klein	Petite	Pequeño	Piccola
+Normal	Normal	Normale	Normal	Normale
+Large	Groß	Grande	Grande	Grande
+Heading 1	Überschrift 1	Titre 1	Título 1	Titolo 1
+Heading 2	Überschrift 2	Titre 2	Título 2	Titolo 2
+Heading 3	Überschrift 3	Titre 3	Título 3	Titolo 3
+Not a Heading	Keine Überschrift	Pas un titre	Sin título	Nessun titolo
+## amiga/main.c
+Outline	Gliederung	Plan	Esquema	Struttura
+Untitled	Unbenannt	Sans titre	Sin título	Senza titolo
+Line %ld, Column %ld	Zeile %ld, Spalte %ld	Ligne %ld, colonne %ld	Línea %ld, columna %ld	Riga %ld, colonna %ld
+%ld words	%ld Wörter	%ld mots	%ld palabras	%ld parole
+Modified	Geändert	Modifié	Modificado	Modificato
+Saved	Gespeichert	Enregistré	Guardado	Salvato
+Name: %s\nLines: %ld\nWords: %ld\nCharacters: %ld (%ld without spaces)\nParagraphs: %ld\nLine ends: %s	Name: %s\nZeilen: %ld\nWörter: %ld\nZeichen: %ld (%ld ohne Leerzeichen)\nAbsätze: %ld\nZeilenenden: %s	Nom : %s\nLignes : %ld\nMots : %ld\nCaractères : %ld (%ld sans les espaces)\nParagraphes : %ld\nFins de ligne : %s	Nombre: %s\nLíneas: %ld\nPalabras: %ld\nCaracteres: %ld (%ld sin espacios)\nPárrafos: %ld\nFines de línea: %s	Nome: %s\nRighe: %ld\nParole: %ld\nCaratteri: %ld (%ld senza spazi)\nParagrafi: %ld\nFine riga: %s
+_Save|_Don't Save|_Cancel	_Speichern|_Nicht speichern|_Abbrechen	_Enregistrer|_Ne pas enregistrer|_Annuler	_Guardar|_No guardar|_Cancelar	_Salva|_Non salvare|_Annulla
+The document has changes that aren't saved. Save them first?	Das Dokument hat ungespeicherte Änderungen. Zuerst speichern?	Le document a des modifications non enregistrées. Les enregistrer d'abord ?	El documento tiene cambios sin guardar. ¿Guardarlos antes?	Il documento ha modifiche non salvate. Salvarle prima?
+Jotter couldn't open %s.	Jotter konnte %s nicht öffnen.	Jotter n'a pas pu ouvrir %s.	Jotter no pudo abrir %s.	Jotter non ha potuto aprire %s.
+Jotter couldn't save %s.	Jotter konnte %s nicht speichern.	Jotter n'a pas pu enregistrer %s.	Jotter no pudo guardar %s.	Jotter non ha potuto salvare %s.
+Open	Öffnen	Ouvrir	Abrir	Apri
+Save As	Speichern unter	Enregistrer sous	Guardar como	Salva con nome
+_Revert|_Cancel	_Zurücksetzen|_Abbrechen	_Rétablir|_Annuler	_Revertir|_Cancelar	_Ripristina|_Annulla
+Put the document back as it was last saved? The changes since are lost.	Das Dokument auf den zuletzt gespeicherten Stand zurücksetzen? Die Änderungen seitdem gehen verloren.	Remettre le document tel qu'il était au dernier enregistrement ? Les modifications depuis seront perdues.	¿Devolver el documento a como estaba la última vez que se guardó? Se perderán los cambios desde entonces.	Riportare il documento com'era all'ultimo salvataggio? Le modifiche successive andranno perse.
+The clipboard couldn't be written to.	In die Zwischenablage konnte nicht geschrieben werden.	Impossible d'écrire dans le Presse-papiers.	No se pudo escribir en el Portapapeles.	Impossibile scrivere negli Appunti.
+Go To Line	Gehe zu Zeile	Atteindre la ligne	Ir a la línea	Vai alla riga
+Line _number	Zeilen_nummer	_Numéro de ligne	_Número de línea	_Numero di riga
+Jotter couldn't start: not enough memory.	Jotter konnte nicht starten: nicht genug Speicher.	Jotter n'a pas pu démarrer : mémoire insuffisante.	Jotter no pudo iniciarse: no hay memoria suficiente.	Jotter non si è potuto avviare: memoria insufficiente.
+A plain-text editor	Ein Editor für reinen Text	Un éditeur de texte brut	Un editor de texto sin formato	Un editor di testo semplice
+Jotter couldn't make its window.	Jotter konnte sein Fenster nicht anlegen.	Jotter n'a pas pu créer sa fenêtre.	Jotter no pudo crear su ventana.	Jotter non ha potuto creare la sua finestra.
+Jotter's window couldn't open.	Jotters Fenster konnte nicht geöffnet werden.	La fenêtre de Jotter n'a pas pu s'ouvrir.	No se pudo abrir la ventana de Jotter.	Non è stato possibile aprire la finestra di Jotter.
+Jotter's fonts drawer wasn't found, so it uses the system's font. (%s)	Jotters Schriften-Schublade wurde nicht gefunden, daher wird die Systemschrift benutzt. (%s)	Le tiroir des polices de Jotter est introuvable : la police du système est utilisée. (%s)	No se encontró el cajón de fuentes de Jotter; se usa la fuente del sistema. (%s)	Il cassetto dei caratteri di Jotter non è stato trovato: si usa il carattere di sistema. (%s)
+## amiga/dialogs.c
+Jotter can't find "%s".	Jotter kann "%s" nicht finden.	Jotter ne trouve pas "%s".	Jotter no encuentra "%s".	Jotter non trova "%s".
+Down	Nach unten	Vers le bas	Hacia abajo	Giù
+Up	Nach oben	Vers le haut	Hacia arriba	Su
+Find _what	_Suchen nach	_Rechercher	_Buscar	_Trova
+Replace _with	_Ersetzen durch	Remplacer _par	Reemplazar _con	_Sostituisci con
+Match _case	Groß-/Kleinschreibung _beachten	Respecter la _casse	Coincidir _mayúsculas y minúsculas	_Maiuscole/minuscole
+Whole words _only	Nur ganze _Wörter	_Mot entier	Solo palabras _completas	Solo parole _intere
+Direction	Richtung	Direction	Dirección	Direzione
+Replace _All	_Alle ersetzen	Remplacer _tout	Reemplazar _todo	Sostituisci _tutto
+_Find Next	_Weitersuchen	_Suivant	_Buscar siguiente	_Trova successivo
+_Replace	_Ersetzen	R_emplacer	R_eemplazar	S_ostituisci
+Jotter replaced %s times.	Jotter hat %s-mal ersetzt.	Jotter a effectué %s remplacements.	Jotter reemplazó %s veces.	Jotter ha sostituito %s volte.
+Light	Hell	Clair	Claro	Chiaro
+Automatic (Locale prefs)	Automatisch (Locale-Voreinsteller)	Automatique (préférences Locale)	Automático (preferencias de Locale)	Automatica (preferenze Locale)
+Options	Optionen	Options	Opciones	Opzioni
+Interface	Oberfläche	Interface	Interfaz	Interfaccia
+_Language	_Sprache	_Langue	_Idioma	_Lingua
+_Theme	_Design	_Thème	_Tema	T_ema
+Te_xt size	Te_xtgröße	Ta_ille du texte	Tamaño del te_xto	Dimensione _testo
+Lar_ge interface text	_Große Schrift in der Oberfläche	_Grand texte dans l'interface	Texto _grande en la interfaz	Testo _grande nell'interfaccia
+Help _bubbles	_Hilfeblasen	_Bulles d'aide	_Globos de ayuda	_Fumetti di aiuto
+The language and the interface's text size change when Jotter starts again.	Sprache und Schriftgröße der Oberfläche ändern sich beim nächsten Start von Jotter.	La langue et la taille du texte de l'interface changent au prochain démarrage de Jotter.	El idioma y el tamaño del texto de la interfaz cambian al volver a iniciar Jotter.	La lingua e la dimensione del testo dell'interfaccia cambiano al prossimo avvio di Jotter.
+Jotter %s\n\nCornerstone's example program: a plain-text editor with a ribbon, a File page, an outline pane and five languages. Free software under the GNU General Public License, version 2.	Jotter %s\n\nDas Beispielprogramm von Cornerstone: ein Editor für reinen Text mit Menüband, Datei-Seite, Gliederungsbereich und fünf Sprachen. Freie Software unter der GNU General Public License, Version 2.	Jotter %s\n\nLe programme d'exemple de Cornerstone : un éditeur de texte brut avec un ruban, une page Fichier, un volet Plan et cinq langues. Logiciel libre sous la licence publique générale GNU, version 2.	Jotter %s\n\nEl programa de ejemplo de Cornerstone: un editor de texto sin formato con cinta, página Archivo, panel Esquema y cinco idiomas. Software libre bajo la Licencia Pública General de GNU, versión 2.	Jotter %s\n\nIl programma di esempio di Cornerstone: un editor di testo semplice con barra multifunzione, pagina File, riquadro Struttura e cinque lingue. Software libero sotto la GNU General Public License, versione 2.
+## amiga/view.c

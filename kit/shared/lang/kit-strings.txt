@@ -1,0 +1,26 @@
+# kit-strings.txt - the words Cornerstone's kit itself shows (buttons of its dialogs, the progress
+# window, the ribbon's Tell Me box and bubbles, Tell Me's window, the start-up messages), in the
+# five languages. A program's mklang.py reads this after the program's own lang/strings.txt
+# (cornerstone.json "strings"). One row per English string, five columns split by a TAB: English,
+# German, French, Spanish, Italian; UTF-8 holding only Latin-1 letters; "-" means "as English".
+# Terms are Microsoft Office's in each language, as the upstream "Craft" programs use.
+
+## cs_dialog.c
+_OK	_OK	_OK	_Aceptar	_OK
+OK	OK	OK	Aceptar	OK
+_Cancel	_Abbrechen	_Annuler	_Cancelar	_Annulla
+## cs_jobs.c
+Working	Wird ausgeführt	Opération en cours	Trabajando	Operazione in corso
+_Abort (Esc)	_Abbrechen (Esc)	_Interrompre (Échap)	_Anular (Esc)	_Interrompi (Esc)
+There isn't enough memory for %s. It needs %lu KB; the largest free block is %lu KB.	Für %s ist nicht genug Speicher frei. Benötigt werden %lu KB; der größte freie Block hat %lu KB.	Mémoire insuffisante pour %s. Il faut %lu Ko ; le plus grand bloc libre fait %lu Ko.	No hay memoria suficiente para %s. Hacen falta %lu KB; el bloque libre más grande tiene %lu KB.	Memoria insufficiente per %s. Servono %lu KB; il blocco libero più grande è di %lu KB.
+## cs_ribbonmui.c, cs_tellme.c
+File	Datei	Fichier	Archivo	File
+Tell me	Sie wünschen...	Dites-nous	¿Qué desea hacer?	Cerca
+This group's tools, as a list: the window is too narrow to show them.	Die Befehle dieser Gruppe als Liste: Das Fenster ist zu schmal, um sie zu zeigen.	Les outils de ce groupe, sous forme de liste : la fenêtre est trop étroite pour les afficher.	Las herramientas de este grupo, en una lista: la ventana es demasiado estrecha para mostrarlas.	Gli strumenti di questo gruppo, in un elenco: la finestra è troppo stretta per mostrarli.
+ (Amiga-%s)	 (Amiga-%s)	 (Amiga-%s)	 (Amiga-%s)	 (Amiga-%s)
+%s  (Amiga-%s)	%s  (Amiga-%s)	%s  (Amiga-%s)	%s  (Amiga-%s)	%s  (Amiga-%s)
+Tell Me	Sie wünschen	Dites-nous	Dígame	Dimmi
+What do you want to do?	Was möchten Sie tun?	Que voulez-vous faire ?	¿Qué desea hacer?	Che cosa si desidera fare?
+## cs_app.c
+This program needs AmigaOS 3.0 or later.	Dieses Programm braucht AmigaOS 3.0 oder neuer.	Ce programme nécessite AmigaOS 3.0 ou plus récent.	Este programa necesita AmigaOS 3.0 o posterior.	Questo programma richiede AmigaOS 3.0 o successivo.
+This program needs MUI 3.8 or later (muimaster.library 19).	Dieses Programm braucht MUI 3.8 oder neuer (muimaster.library 19).	Ce programme nécessite MUI 3.8 ou plus récent (muimaster.library 19).	Este programa necesita MUI 3.8 o posterior (muimaster.library 19).	Questo programma richiede MUI 3.8 o successivo (muimaster.library 19).

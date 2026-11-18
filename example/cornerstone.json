@@ -1,0 +1,12 @@
+{
+  "program": "Jotter",
+  "strings": ["lang/strings.txt", "../kit/shared/lang/kit-strings.txt"],
+  "ignore": ["lang/ignore.txt", "../kit/shared/lang/kit-ignore.txt"],
+  "table": "amiga/lang_table.h",
+  "sources": ["amiga/*.c", "amiga/*.h", "ui/*.c", "ui/*.h", "../kit/amiga/*.c", "../kit/shared/cs_*.c"],
+  "exclude": ["amiga/lang_table.h"],
+  "fonts": "../kit/amiga/fonts",
+  "fit": { "sources": ["ui/commands.c"], "init": "jotter_commands_init", "ribbon": "jotter_ribbon",
+           "menus": "jotter_menus", "width": 618 },
+  "gap": "docs/notepad-gap.md"
+}

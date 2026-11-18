@@ -423,6 +423,7 @@ CS_DISPATCHER(rdispatch)
       if (_win(obj) && d->shown) { Object *p = (Object *)cs_get(obj, MUIA_Parent); if (p && DoMethod(p, MUIM_Group_InitChange)) DoMethod(p, MUIM_Group_ExitChange); }
     }
     if ((t = FindTagItem(MUIA_CsRibbon_PopChoice, tags))) pop_choice(d, obj, (LONG)t->ti_Data);
+    if ((t = FindTagItem(MUIA_CsRibbon_Value, tags))) d->value = (LONG)t->ti_Data;
     break;
   }
   case OM_GET: {

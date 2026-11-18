@@ -1,0 +1,5 @@
+# build products (they go to $TMP; these in case one is built in place)
+example/Jotter
+*.o
+*.lha
+__pycache__/

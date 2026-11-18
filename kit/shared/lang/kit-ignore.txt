@@ -1,0 +1,31 @@
+# kit-ignore.txt - literals in the kit's source that are not interface words: log lines, the
+# menu check's reports (written to the log, in English), the language names (each shown in its
+# own language), codes, the font loader's reasons (in the log and the fonts warning).
+English
+Deutsch
+Fran\347ais
+Espa\361ol
+Italiano
+en
+de
+fr
+es
+it
+english
+deutsch
+fran\347ais
+espa\361ol
+italiano
+can't open
+can't read
+not a font file:
+no sizes in
+not a font:
+more than 31 menus at "%s"%s
+menu %lu "%s" has more than 63 items
+a submenu of menu %lu "%s" has more than 31 items
+command %lu is in the menus but in no table%s
+command %lu "%s" is in the menus twice
+shortcut of command %lu is also "%s"'s
+iargoydwlts
+aaaaaaaceeeeiiiidnooooo\327ouuuuytsaaaaaaaceeeeiiiidnooooo\367ouuuuyty

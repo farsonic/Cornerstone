@@ -1,0 +1,7 @@
+# lang/ignore.txt - literals in Jotter's source that are not interface words
+Jotter
+Jotter - %s%s
+GPL-2.0-only
+CR LF
+LF
+) Cornerstone's example program
