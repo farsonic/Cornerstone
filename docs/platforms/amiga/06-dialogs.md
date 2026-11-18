@@ -75,6 +75,8 @@ Quill's emulator check:
   <img src="../../img/quill-02-mailmerge-wizard-zune-fixed-640.png" width="480">
 
   *Quill's Mail Merge Wizard on Zune, its choices as cycle gadgets.*
+- **No Balance class** (found with Jotter: its window couldn't be made, the log showed the Balance
+  object was NULL): `cs_balance()` makes MUI's splitter, or a thin line that can't be dragged.
 - **No Scrollgroup or Virtgroup**: a dialog that relied on scrolling (Quill's Match Fields, 29 rows)
   must fit without it: two pairs to a row, or pages.
 - **Frame titles** are drawn faint (white on the frame) by Zune: a Zune look; check on MUI 3.8.

@@ -340,6 +340,13 @@ Object *cs_radio(const char *const *entries)
   CS_LOG("dialog: no Radio class (Zune?): a cycle gadget instead");
   return cs_cycle(entries);
 }
+Object *cs_balance(void)
+{
+  Object *o = MUI_NewObject((STRPTR)MUIC_Balance, TAG_DONE);
+  if (o) return o;
+  CS_LOG("window: no Balance class (Zune?): a line instead");
+  return RectangleObject, MUIA_Rectangle_VBar, TRUE, MUIA_FixWidth, 3, End;
+}
 Object *cs_cycle(const char *const *entries)
 {
   return CycleObject, MUIA_Cycle_Entries, (ULONG)tr_list(entries), MUIA_CycleChain, 1, End;

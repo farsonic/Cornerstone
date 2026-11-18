@@ -50,6 +50,9 @@ int cs_file_request(int save, const char *title, char *path, int cap, const char
 Object *cs_radio(const char *const *entries);
 extern int cs_radio_is_cycle;
 #define CS_RADIO_ACTIVE (cs_radio_is_cycle ? MUIA_Cycle_Active : MUIA_Radio_Active)
+/* a splitter between a pane and the document: MUI's Balance, or where that class can't be made
+   (some Zune versions: found in the emulator) a thin line that can't be dragged */
+Object *cs_balance(void);
 /* a cycle gadget, translated */
 Object *cs_cycle(const char *const *entries);
 /* a check mark with its label on its right, in one row */

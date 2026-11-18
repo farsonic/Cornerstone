@@ -232,9 +232,9 @@ A pane's tabs need no code in main.c: notify `MUIA_CsTabs_Active` into a page gr
 Object *cs_pane(const char *title, Object *contents, Object **header);   /* MUIA_CsPane_Close (notify) */
 ```
 
-The title in bold and a close box over the contents, in a group of weight 30. Put a `BalanceObject`
-between pane and document so the width can be dragged (MUI's own splitter, on MUI and Zune), and
-hide both with `MUIA_ShowMe` when the pane is turned off.
+The title in bold and a close box over the contents, in a group of weight 30. Put `cs_balance()` between pane and document so the width can be dragged (MUI's own Balance
+splitter; a plain line on the Zune versions that lack the class), and hide both with `MUIA_ShowMe`
+when the pane is turned off.
 
 ### The File page's column: `cs_backstage.c`
 

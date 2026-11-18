@@ -103,10 +103,13 @@ static Object *make_window(void)
   outline = ListviewObject, MUIA_Listview_List, outlist = ListObject, InputListFrame, MUIA_List_ConstructHook, MUIV_List_ConstructHook_String,
                                                  MUIA_List_DestructHook, MUIV_List_DestructHook_String, End, MUIA_CycleChain, 1, End;
   pane = cs_pane("Outline", outline, &panehead);
-  balance = BalanceObject, End;
+  balance = cs_balance();                          /* (MUI's splitter; a line where Zune lacks it) */
   ribbon = NewObject(cs_ribbon_class()->mcc_Class, NULL, MUIA_CsRibbon_Def, (ULONG)&jotter_ribbon, MUIA_ShortHelp, (ULONG)" ", TAG_DONE);
   status = NewObject(cs_status_class()->mcc_Class, NULL, MUIA_CsStatus_Fields, (ULONG)"L0 R70 R100 R130", TAG_DONE);
   backstage = NewObject(cs_backstage_class()->mcc_Class, NULL, MUIA_CsBackstage_Ids, (ULONG)jotter_filepage, TAG_DONE);
+  /* (DEBUG=: which part couldn't be made, if the window can't be) */
+  CS_LOG("window: view %p, scroll bars %p %p, outline %p, pane %p, balance %p, ribbon %p, status %p, File page %p",
+         (void *)view, (void *)vscroll, (void *)hscroll, (void *)outline, (void *)pane, (void *)balance, (void *)ribbon, (void *)status, (void *)backstage);
   main_page = VGroup, InnerSpacing(0, 0), MUIA_Group_Spacing, 0,
     Child, ribbon,
     Child, HGroup, InnerSpacing(0, 0), MUIA_Group_Spacing, 0,
@@ -127,6 +130,7 @@ static Object *make_window(void)
       Child, VSpace(0),
     End,
   End;
+  CS_LOG("window: main page %p, File page %p, menus %p", (void *)main_page, (void *)file_page, (void *)strip);
   w = CsWindowObject,
     MUIA_Window_Title, (ULONG)"Jotter",                /* lang: as is (refresh_all sets the real one) */
     MUIA_Window_ID, MAKE_ID('J', 'O', 'T', 'R'),

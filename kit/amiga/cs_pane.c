@@ -1,12 +1,12 @@
 /*
  * cs_pane.c - a side pane's header: its title in bold on the pane's colour and a close box at its
  * far end (MUIA_CsPane_Close). cs_pane() puts a header over the pane's contents in a group with a
- * line down its inner edge; put a Balance object between the pane and the document so the user can
- * drag its width (MUI's own splitter: it works on MUI and Zune and needs nothing of ours):
+ * line down its inner edge; put cs_balance() between the pane and the document so the user can drag
+ * its width (MUI's own Balance splitter; a plain line on the Zune versions that lack that class):
  *
  *   Child, HGroup, MUIA_Group_Spacing, 0,
  *     Child, pane = cs_pane("Navigation", list, &head),
- *     Child, BalanceObject, End,
+ *     Child, cs_balance(),
  *     Child, view,
  *   End,
  */
