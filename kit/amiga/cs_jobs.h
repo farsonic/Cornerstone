@@ -15,6 +15,7 @@
 void cs_job_begin(const char *what);            /* what: the command's name, shown in the window (English) */
 int  cs_job_end(void);                          /* 1 if the job was aborted */
 int  cs_job_aborted(void);                      /* Abort was pressed in the job running */
+void cs_jobs_reset_timer(void);                 /* after a dialog: its time doesn't count (cs_run_modal calls it) */
 void cs_jobs_free(void);                        /* at the end: the keyboard device given back */
 extern int cs_jobs_window;                      /* 0 while starting up (no window over the splash) */
 extern int cs_jobs_shown;                       /* (testing) how often the window has opened */

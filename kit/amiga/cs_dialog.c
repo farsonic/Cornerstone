@@ -16,6 +16,7 @@
 #include "cs_theme.h"
 #include "cs_lang.h"
 #include "cs_util.h"
+#include "cs_jobs.h"
 
 /* ---------------------------------------------------------------- the button and label classes */
 #define MUIA_CsButton_Label CS_TAG(0x700)    /* (init) the label, "_" before its key */
@@ -261,6 +262,7 @@ ULONG cs_run_modal(Object *w, const ULONG *ends, void (*each)(ULONG id))
   DoMethod(cs_app, OM_REMMEMBER, (ULONG)w);
   cs_redraw_window();
   cs_progress_hook = hook;
+  cs_jobs_reset_timer();
   return id;
 }
 
@@ -275,6 +277,7 @@ int cs_ask(const char *gadgets, const char *fmt, const char *arg)
   cs_wrap(text, wrapped, sizeof wrapped, CS_WRAP_ASK);
   r = (int)MUI_Request(cs_app, cs_win, 0, NULL, (STRPTR)tr(gadgets), (STRPTR)"%s", (ULONG)wrapped);
   cs_redraw_window();
+  cs_jobs_reset_timer();
   return r;
 }
 int cs_ask_string(const char *t, const char *label, char *buf, int cap)

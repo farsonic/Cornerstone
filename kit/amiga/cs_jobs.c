@@ -134,6 +134,14 @@ int cs_job_end(void)
   return aborted;
 }
 int cs_job_aborted(void) { return abort_flag != 0; }
+/* the jobs' clocks started again: time spent in a dialog or requester doesn't count towards the
+   half second before the progress window opens */
+void cs_jobs_reset_timer(void)
+{
+  int i;
+  LONG t = ticks();
+  for (i = 0; i < njobs && i < MAXJOBS; i++) jobs[i].started = t;
+}
 
 int cs_memory_check(unsigned long bytes, const char *what)
 {

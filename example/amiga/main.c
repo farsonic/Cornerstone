@@ -40,7 +40,7 @@ static const CsWords words[] = {
 };
 
 Object *app, *win, *ribbon, *view, *status;
-static Object *strip, *pages, *pane, *balance, *outline, *vscroll, *hscroll, *backstage, *infotext, *panehead;
+static Object *strip, *pages, *pane, *balance, *outline, *outlist, *vscroll, *hscroll, *backstage, *infotext, *panehead;
 TextDoc doc;
 Prefs prefs = { 0, 0, 1, 1, 1, 0, 1, 0 };
 static TOutline heads[200];
@@ -100,7 +100,7 @@ static Object *make_window(void)
   hscroll = cs_scrollbar(1);
   view = NewObject(view_class()->mcc_Class, NULL, MUIA_FillArea, FALSE, MUIA_View_Text, (ULONG)&doc, MUIA_View_VScroll, (ULONG)vscroll,
                    MUIA_View_HScroll, (ULONG)hscroll, MUIA_View_Wrap, prefs.wrap, MUIA_View_FontSize, prefs.size, TAG_DONE);
-  outline = ListviewObject, MUIA_Listview_List, ListObject, InputListFrame, MUIA_List_ConstructHook, MUIV_List_ConstructHook_String,
+  outline = ListviewObject, MUIA_Listview_List, outlist = ListObject, InputListFrame, MUIA_List_ConstructHook, MUIV_List_ConstructHook_String,
                                                  MUIA_List_DestructHook, MUIV_List_DestructHook_String, End, MUIA_CycleChain, 1, End;
   pane = cs_pane("Outline", outline, &panehead);
   balance = BalanceObject, End;
@@ -145,7 +145,7 @@ static Object *make_window(void)
   DoMethod(view, MUIM_Notify, MUIA_View_Changed, MUIV_EveryTime, (ULONG)app, 2, MUIM_Application_ReturnID, ID_VIEWCHG);
   DoMethod(status, MUIM_Notify, MUIA_CsStatus_Click, MUIV_EveryTime, (ULONG)app, 2, MUIM_Application_ReturnID, ID_STATUSCLICK);
   DoMethod(panehead, MUIM_Notify, MUIA_CsPane_Close, MUIV_EveryTime, (ULONG)app, 2, MUIM_Application_ReturnID, ID_PANECLOSE);
-  DoMethod(outline, MUIM_Notify, MUIA_Listview_SelectChange, TRUE, (ULONG)app, 2, MUIM_Application_ReturnID, ID_OUTLINEPICK);
+  DoMethod(outlist, MUIM_Notify, MUIA_List_Active, MUIV_EveryTime, (ULONG)app, 2, MUIM_Application_ReturnID, ID_OUTLINEPICK);
   DoMethod(outline, MUIM_Notify, MUIA_Listview_DoubleClick, TRUE, (ULONG)app, 2, MUIM_Application_ReturnID, ID_OUTLINEPICK);
   DoMethod(w, MUIM_Notify, MUIA_Window_InputEvent, (ULONG)"esc", (ULONG)app, 2, MUIM_Application_ReturnID, ID_BACKSTAGE);
   /* the scroll bars move the view; the view keeps them in step itself */
@@ -375,7 +375,7 @@ static void report(ULONG id)
     ULONG pick = cs_get(backstage, MUIA_CsBackstage_Pick);
     int was = file_page_open();
     if (!was) break;
-    set(backstage, MUIA_CsBackstage_Pick, ~0UL);       /* (read: so Esc next time isn't taken for it) */
+    nnset(backstage, MUIA_CsBackstage_Pick, ~0UL);     /* (read: so Esc next time isn't taken for it; nnset: no report of it) */
     if (pick == ~0UL || pick == 0) { show_file_page(0); break; }
     if (pick == ID_INFO) { set(backstage, MUIA_CsBackstage_Active, pick); refresh_all(); break; }
     show_file_page(0);
