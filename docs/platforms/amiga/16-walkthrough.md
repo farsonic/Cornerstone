@@ -217,5 +217,8 @@ a screenshot of each. The results are in the next section.
 
 ## Jotter in the emulator
 
-See [`../../img/jotter/`](../../img/jotter/) and the notes in
-[the emulator results](16-walkthrough-emulator.md).
+The results, with thirteen screenshots and what the first runs found (a missing Balance class on
+Zune, Esc sending a close request, two classes not answering `OM_GET`), are in
+[Jotter in the emulator](16-walkthrough-emulator.md).
+
+<img src="../../img/jotter/01-home.png" width="640">

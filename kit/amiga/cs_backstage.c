@@ -17,7 +17,7 @@
 #include "cs_lang.h"
 
 #define MAXB 24
-typedef struct { CS_CLASS_HEAD; const ULONG *ids; int n, hot, active; } BData;
+typedef struct { CS_CLASS_HEAD; const ULONG *ids; int n, hot, active; ULONG pick; } BData;
 static struct MUI_CustomClass *bcls;
 
 static LONG rowh(void) { return cs_font()->tf_YSize + 14; }
@@ -76,6 +76,8 @@ CS_DISPATCHER(bdispatch)
     struct TagItem *t = FindTagItem(MUIA_CsBackstage_Active, ((struct opSet *)msg)->ops_AttrList);
     int i;
     d = INST_DATA(cl, obj);
+    if ((t = FindTagItem(MUIA_CsBackstage_Pick, ((struct opSet *)msg)->ops_AttrList))) d->pick = t->ti_Data;   /* (kept for OM_GET) */
+    t = FindTagItem(MUIA_CsBackstage_Active, ((struct opSet *)msg)->ops_AttrList);
     if (t) {
       for (i = 0; i < d->n && d->ids[i] != t->ti_Data; i++) ;
       d->active = i < d->n ? i : -1;
@@ -83,6 +85,9 @@ CS_DISPATCHER(bdispatch)
     }
     break;
   }
+  case OM_GET:
+    if (((struct opGet *)msg)->opg_AttrID == MUIA_CsBackstage_Pick) { *((struct opGet *)msg)->opg_Storage = ((BData *)INST_DATA(cl, obj))->pick; return TRUE; }
+    break;
   case MUIM_AskMinMax: {
     struct RastPort *rp = &_screen(obj)->RastPort;
     LONG w = 120;

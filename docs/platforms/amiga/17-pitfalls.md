@@ -32,6 +32,7 @@ What the family has hit, so the next program doesn't.
 | Setting a gadget triggers your own handler | `set()` fires notifications | `nnset()` |
 | A dialog never opens on Zune | no Radio class (some Zune versions) | `cs_radio()` falls back to a cycle gadget |
 | The main window can't be made on Zune; nothing says why | no Balance class there; any NULL child fails the whole window | `cs_balance()`; log each part's pointer (`DEBUG=`) as Jotter's `make_window` does |
+| Esc quits the program on Zune | Esc sends the window a close request as well as its "esc" input event (Zune; MUI with Esc set to close windows) | take the close request that follows an Esc as Esc (Jotter's `esc_just`); dialogs map both to Cancel and ignore the leftover |
 | A long dialog doesn't fit on Zune | no Scrollgroup/Virtgroup | two to a row, or pages |
 | Frame titles faint on Zune | Zune's look | check on MUI 3.8 |
 | A window too tall doesn't open at all | MUI refuses it silently | keep to 480 lines; `cs_run_modal` logs it |

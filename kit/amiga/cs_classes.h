@@ -62,7 +62,7 @@ struct MUI_CustomClass *cs_status_class(void);
 #define MUIA_CsStatus_Fields   CS_TAG(0x400)   /* (init) const char *: field widths, "L120 L80 R60"
                                                   (L from the left, R from the right; width in
                                                   pixels, 0 = the rest) */
-#define MUIA_CsStatus_Click    CS_TAG(0x401)   /* (notify) a field was clicked: its number */
+#define MUIA_CsStatus_Click    CS_TAG(0x401)   /* (get, notify) a field was clicked: its number */
 #define MUIM_CsStatus_Set      CS_TAG(0x410)   /* LONG field, const char *text (copied) */
 
 /* ---- a pane's header (cs_pane.c): its title and a close box. cs_pane() makes header and
@@ -75,7 +75,7 @@ Object *cs_pane(const char *title, Object *contents, Object **header);
 /* ---- the File page's command column (cs_backstage.c): Back, then the File commands */
 struct MUI_CustomClass *cs_backstage_class(void);
 #define MUIA_CsBackstage_Ids   CS_TAG(0x600)   /* (init) const ULONG *, 0-ended: command ids (~0UL: a line) */
-#define MUIA_CsBackstage_Pick  CS_TAG(0x601)   /* (notify) the command clicked (0: Back) */
+#define MUIA_CsBackstage_Pick  CS_TAG(0x601)   /* (get, notify) the command clicked (0: Back) */
 #define MUIA_CsBackstage_Active CS_TAG(0x602)  /* (set) the command whose page is shown, lit */
 
 /* ---- Tell Me (cs_tellme.c): a box to type in; the commands found, run with Return */

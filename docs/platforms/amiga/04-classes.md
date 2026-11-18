@@ -115,7 +115,8 @@ flags every class needs), `CS_CLASS_COMMON(T)` (the Setup, Cleanup, Show and Hid
   (`cs_theme_handler`/`cs_theme_cleanup` do both). Return `MUI_EventHandlerRC_Eat` only for events
   that are yours. A class that needs keys before others sets `ehn_Priority` (the ribbon: 1).
 - **Report outward with attributes, not calls**: set a (notify) attribute and let main.c decide
-  what it means; for "something happened" with no value, set it to TRUE each time
+  what it means, and answer `OM_GET` for it too (Area doesn't keep attributes it doesn't know: an
+  unanswered get reads 0, which once made every File page choice look like Back); for "something happened" with no value, set it to TRUE each time
   (`MUIV_EveryTime` notifications fire on every set).
 - **Take orders with methods**: `MUIM_<Class>_Refresh` (redraw from the program's state) is the
   usual one. Classes read the program's state through functions (`cs_cmd_state()`, the document
@@ -224,7 +225,7 @@ A pane's tabs need no code in main.c: notify `MUIA_CsTabs_Active` into a page gr
 |---|---|
 | `MUIA_CsStatus_Fields` (init) | `"L0 R70 R100 R130"`: each field's side (from the Left or Right) and width in pixels, 0 the rest |
 | `MUIM_CsStatus_Set, field, text` | a field's text (copied; redrawn only if it changed) |
-| `MUIA_CsStatus_Click` (notify) | a field was clicked: its number |
+| `MUIA_CsStatus_Click` (get, notify) | a field was clicked: its number |
 
 ### A pane's header: `cs_pane.c`
 
@@ -241,7 +242,7 @@ when the pane is turned off.
 | | |
 |---|---|
 | `MUIA_CsBackstage_Ids` (init) | `const ULONG *`, 0-ended: commands (`~0UL` a line) |
-| `MUIA_CsBackstage_Pick` (notify) | the command clicked; 0 is Back |
+| `MUIA_CsBackstage_Pick` (get, notify) | the command clicked; 0 is Back |
 | `MUIA_CsBackstage_Active` (set) | the command whose page is shown, lit |
 
 A band in the accent colour with Back and each command's icon (in one pen, `cs_icon_pen`) and name

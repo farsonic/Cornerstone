@@ -59,7 +59,10 @@ Emulator: `example/tools/emucheck.sh` (FS-UAE, AROS ROM, Zune; shared: it takes
 
 Made in November 2026 (first version): the guide (15 shared chapters, 18 Amiga chapters, the
 classic Mac chapter), the kit, Jotter. Jotter's native tests pass, it links with vbcc, its package
-builds; its emulator run is described in `docs/platforms/amiga/16-walkthrough-emulator.md`.
+builds, and it runs in FS-UAE with AROS/Zune (ribbon, KeyTips, File page, Tell Me, typing, Replace,
+Options, German, dark, right to left: `docs/platforms/amiga/16-walkthrough-emulator.md`, with what
+the runs found and fixed: no Balance class on Zune, Esc sending a close request, `OM_GET` for
+reported attributes).
 
 Next:
 - Not yet checked on real AmigaOS 3.x with MUI 3.8 (only AROS/Zune in FS-UAE).

@@ -68,11 +68,13 @@ waitlog l1.log 14; shot 01-home
 key F10 3; shot 02-keytips
 key i 3; shot 03-keytips-insert
 key Escape 1; key Escape 2; shot 04-insert
-key F10 2; key v 2; key Escape 1; key Escape 2; shot 05-view
+key F10 2; key v 2; shot 05-view-keytips
+key Escape 1; key Escape 2
 key F10 2; key f 4; shot 06-filepage
 key Escape 3
 key F10 2; key q 4; DISPLAY=$DPY xdotool type --delay 300 "save"; sleep 3; shot 07-tellme
 key Escape 2
+DISPLAY=$DPY xdotool type --delay 200 "Hello"; key Return 2; shot 07b-typing
 waitlog g1.log 12; shot 08-german
 waitlog d1.log 12; shot 09-dark
 waitlog r1.log 12; shot 10-rtl
@@ -87,4 +89,5 @@ kill $UPID 2>/dev/null; sleep 2; kill -9 $UPID 2>/dev/null
 kill $XPID 2>/dev/null
 cp $D/*.log $W/ 2>/dev/null
 mv $D $W/drawer.$$
+[ -e $D.uaem ] && mv $D.uaem $W/drawer.$$.uaem   # (FS-UAE's note of the drawer's Amiga attributes)
 echo emu done

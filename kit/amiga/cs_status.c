@@ -16,7 +16,7 @@
 #include "cs_util.h"
 
 #define MAXF 8
-typedef struct { CS_CLASS_HEAD; int n; char side[MAXF]; LONG w[MAXF], x0[MAXF], x1[MAXF]; char text[MAXF][80]; } SData;
+typedef struct { CS_CLASS_HEAD; LONG click; int n; char side[MAXF]; LONG w[MAXF], x0[MAXF], x1[MAXF]; char text[MAXF][80]; } SData;
 static struct MUI_CustomClass *scls;
 
 /* the field boxes: left ones from the left, right ones from the right, a width of 0 takes the rest */
@@ -70,6 +70,14 @@ CS_DISPATCHER(sdispatch)
     CS_EHN(d, IDCMP_MOUSEBUTTONS);
     return (ULONG)obj;
   }
+  case OM_SET: {
+    struct TagItem *t = FindTagItem(MUIA_CsStatus_Click, ((struct opSet *)msg)->ops_AttrList);
+    if (t) ((SData *)INST_DATA(cl, obj))->click = (LONG)t->ti_Data;   /* (kept for OM_GET) */
+    break;
+  }
+  case OM_GET:
+    if (((struct opGet *)msg)->opg_AttrID == MUIA_CsStatus_Click) { *((struct opGet *)msg)->opg_Storage = (ULONG)((SData *)INST_DATA(cl, obj))->click; return TRUE; }
+    break;
   case MUIM_CsStatus_Set: {
     LONG f = ((LONG *)msg)[1];
     const char *t = (const char *)((ULONG *)msg)[2];

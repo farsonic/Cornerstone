@@ -107,6 +107,7 @@ static Object *make_window(void)
   ribbon = NewObject(cs_ribbon_class()->mcc_Class, NULL, MUIA_CsRibbon_Def, (ULONG)&jotter_ribbon, MUIA_ShortHelp, (ULONG)" ", TAG_DONE);
   status = NewObject(cs_status_class()->mcc_Class, NULL, MUIA_CsStatus_Fields, (ULONG)"L0 R70 R100 R130", TAG_DONE);
   backstage = NewObject(cs_backstage_class()->mcc_Class, NULL, MUIA_CsBackstage_Ids, (ULONG)jotter_filepage, TAG_DONE);
+  if (backstage) nnset(backstage, MUIA_CsBackstage_Pick, ~0UL);   /* (nothing picked: Esc tells itself apart by this) */
   /* (DEBUG=: which part couldn't be made, if the window can't be) */
   CS_LOG("window: view %p, scroll bars %p %p, outline %p, pane %p, balance %p, ribbon %p, status %p, File page %p",
          (void *)view, (void *)vscroll, (void *)hscroll, (void *)outline, (void *)pane, (void *)balance, (void *)ribbon, (void *)status, (void *)backstage);
@@ -394,7 +395,7 @@ int main(int argc, char **argv)
 {
   CsArgs args;
   ULONG sigs = 0, id;
-  int rc = 20;
+  int rc = 20, esc_just = 0;
   if (!cs_libs_open("Jotter")) goto done;
   cs_args(argc, argv, &args);
   CS_LOG("Jotter %s starting", JOTTER_VERSION);
@@ -432,8 +433,13 @@ int main(int argc, char **argv)
   if (args.cmd) jotter_command(args.cmd, -1);         /* CMD=n: a command at once (testing) */
   for (;;) {
     id = cs_input(&sigs);
+    if (id) CS_LOG("input %ld", (long)id);
+    /* Esc: on Zune (and on MUI with Esc set to close windows) a press of Esc also sends the window
+       a close request, right after the "esc" input event: that one isn't the user asking to quit */
+    if (id == ID_QUIT && esc_just) { esc_just = 0; continue; }
+    esc_just = id == ID_BACKSTAGE && cs_get(backstage, MUIA_CsBackstage_Pick) == ~0UL;
     if (id == MUIV_Application_ReturnID_Quit || id == ID_QUIT) { if (may_discard()) break; continue; }
-    if (!id) continue;
+    if (id < 100) continue;                           /* (a dialog's button that arrived after it closed) */
     if (id >= ID_VIEWCHG) { report(id); continue; }
     {
       LONG value = (LONG)cs_get(ribbon, MUIA_CsRibbon_Value);
