@@ -18,17 +18,17 @@ static const char *const set[CS_IC_N][2] = {
   { "SAVEAS",     "ci R 1 1 11 11 F 3 1 8 4 R 3 7 9 11 ca L 9 14 14 9 L 12 9 14 9 L 14 9 14 11" }, /* a smaller disk and a pen-stroke arrow */
   { "CLOSE",      "ci R 2 1 13 15 cr L 5 6 10 11 L 10 6 5 11" },                                  /* a page crossed out */
   { "PRINT",      "ci R 4 1 11 5 R 1 5 14 11 R 4 9 11 15 ca F 11 7 12 7" },                        /* a printer with paper */
-  { ">EXPORT",    "ci R 2 4 10 15 ca L 7 9 14 2 L 10 2 14 2 L 14 2 14 6" },                        /* an arrow leaving a page */
-  { ">IMPORT",    "ci R 5 1 14 15 cd L 7 5 12 5 L 7 8 12 8 L 7 11 12 11 ca L 1 8 8 8 L 5 5 8 8 L 5 11 8 8" },   /* an arrow into a page */
+  { "EXPORT",    ">ci R 2 4 10 15 ca L 7 9 14 2 L 10 2 14 2 L 14 2 14 6" },                        /* an arrow leaving a page */
+  { "IMPORT",    ">ci R 5 1 14 15 cd L 7 5 12 5 L 7 8 12 8 L 7 11 12 11 ca L 1 8 8 8 L 5 5 8 8 L 5 11 8 8" },   /* an arrow into a page */
   { "INFO",       "ci O 7 7 6 ca F 7 6 8 11 F 7 3 8 4" },                                         /* i in a ring */
   { "RECENT",     "ci O 8 8 6 ca L 8 8 8 4 L 8 8 11 8 ci L 1 3 3 5 L 3 5 5 3" },                   /* a clock with a turn arrow */
   { "OPTIONS",    "ci O 7 7 3 L 7 1 7 3 L 7 11 7 13 L 1 7 3 7 L 11 7 13 7 L 3 3 4 4 L 10 10 11 11 L 3 11 4 10 L 10 4 11 3" },   /* a cog */
   { "ABOUT",      "ci O 7 7 6 ca L 6 5 7 4 L 7 4 9 4 L 9 4 9 6 L 9 6 7 8 L 7 8 7 9 F 7 11 7 11" }, /* ? in a ring */
-  { ">QUIT",      "ci P 4 9 4 9 1 2 1 2 14 P 3 2 14 9 14 9 11 ca L 6 8 14 8 L 11 5 14 8 L 11 11 14 8" },   /* a door and an arrow out */
-  { ">BACK",      "ci L 9 3 5 8 L 5 8 9 13" },                                                    /* a chevron back */
+  { "QUIT",      ">ci P 4 9 4 9 1 2 1 2 14 P 3 2 14 9 14 9 11 ca L 6 8 14 8 L 11 5 14 8 L 11 11 14 8" },   /* a door and an arrow out */
+  { "BACK",      ">ci L 9 3 5 8 L 5 8 9 13" },                                                    /* a chevron back */
   /* ---- edit */
-  { ">UNDO",      "ci P 4 13 9 13 5 9 2 3 2 L 3 2 5 0 L 3 2 5 4" },                                /* a curved arrow back */
-  { ">REDO",      "ci P 4 2 9 2 5 6 2 12 2 L 12 2 10 0 L 12 2 10 4" },                             /* and forward */
+  { "UNDO",      ">ci P 4 13 9 13 5 9 2 3 2 L 3 2 5 0 L 3 2 5 4" },                                /* a curved arrow back */
+  { "REDO",      ">ci P 4 2 9 2 5 6 2 12 2 L 12 2 10 0 L 12 2 10 4" },                             /* and forward */
   { "CUT",        "ci O 4 12 2 O 11 12 2 L 5 10 11 1 L 10 10 4 1" },                               /* scissors */
   { "COPY",       "ci R 2 1 9 11 cw F 3 2 8 10 ca R 6 5 13 15 cw F 7 6 12 14 ci L 8 8 11 8 L 8 10 11 10 L 8 12 11 12" },   /* two sheets */
   { "PASTE",      "ci R 3 2 12 15 F 6 1 9 3 cw F 4 4 11 14 ca R 7 7 14 15 cw F 8 8 13 14 ci L 9 10 12 10 L 9 12 12 12" },  /* a clipboard and a sheet */
@@ -36,7 +36,7 @@ static const char *const set[CS_IC_N][2] = {
   { "SELECTALL",  "ci L 1 1 3 1 L 6 1 9 1 L 12 1 14 1 L 1 14 3 14 L 6 14 9 14 L 12 14 14 14 L 1 4 1 6 L 1 9 1 11 L 14 4 14 6 L 14 9 14 11 ca L 4 5 11 5 L 4 8 11 8 L 4 11 9 11" },   /* a dotted frame round lines */
   { "FIND",       "ci O 6 6 4 L 9 9 14 14 L 10 9 15 14" },                                        /* a magnifier */
   { "REPLACE",    "ca B b ci L 9 4 14 4 L 12 2 14 4 L 12 6 14 4 ca L 2 12 7 12 L 4 10 2 12 L 4 14 2 12 ci B c" },   /* b to c and back */
-  { ">GOTO",      "ci R 7 1 14 15 cw F 8 2 13 14 ca L 1 8 10 8 L 7 5 10 8 L 7 11 10 8" },          /* an arrow to a page */
+  { "GOTO",      ">ci R 7 1 14 15 cw F 8 2 13 14 ca L 1 8 10 8 L 7 5 10 8 L 7 11 10 8" },          /* an arrow to a page */
   { "CLEAR",      "ci L 1 12 4 3 L 4 3 7 12 L 2 9 6 9 cr F 9 10 14 14 cw L 10 13 13 11" },         /* A and an eraser */
   /* ---- text */
   { "BOLD",       "B B" },
@@ -50,12 +50,12 @@ static const char *const set[CS_IC_N][2] = {
   { "ALIGNCENTRE","ci L 1 2 14 2 L 3 5 12 5 L 1 8 14 8 L 3 11 12 11 L 2 14 13 14" },
   { "ALIGNRIGHT", "ci L 1 2 14 2 L 5 5 14 5 L 1 8 14 8 L 5 11 14 11 L 3 14 14 14" },
   { "JUSTIFY",    "ci L 1 2 14 2 L 1 5 14 5 L 1 8 14 8 L 1 11 14 11 L 1 14 9 14" },
-  { ">BULLETS",   "ci E 2 3 1 E 2 8 1 E 2 13 1 L 5 3 14 3 L 5 8 14 8 L 5 13 14 13" },
+  { "BULLETS",   ">ci E 2 3 1 E 2 8 1 E 2 13 1 L 5 3 14 3 L 5 8 14 8 L 5 13 14 13" },
   { "NUMBERS",    "ca L 2 1 2 5 L 1 8 3 8 L 3 8 1 11 L 1 11 3 11 ci L 6 3 14 3 L 6 8 14 8 L 6 13 14 13" },
-  { ">INDENT",    "ci L 1 2 14 2 L 7 6 14 6 L 7 10 14 10 L 1 14 14 14 ca P 3 1 5 4 8 1 11" },
-  { ">OUTDENT",   "ci L 1 2 14 2 L 7 6 14 6 L 7 10 14 10 L 1 14 14 14 ca P 3 4 5 1 8 4 11" },
+  { "INDENT",    ">ci L 1 2 14 2 L 7 6 14 6 L 7 10 14 10 L 1 14 14 14 ca P 3 1 5 4 8 1 11" },
+  { "OUTDENT",   ">ci L 1 2 14 2 L 7 6 14 6 L 7 10 14 10 L 1 14 14 14 ca P 3 4 5 1 8 4 11" },
   { "SORT",       "ca L 1 2 4 2 L 1 2 4 6 L 1 6 4 6 ci L 11 1 11 14 L 9 12 11 14 L 13 12 11 14 ca L 1 10 4 10 L 2 10 2 14 L 1 14 4 14" },
-  { ">WRAP",      "ci L 1 3 14 3 L 1 8 11 8 L 1 13 6 13 ca P 4 11 8 14 8 14 12 9 12 L 9 12 11 10 L 9 12 11 14" },   /* lines with a return arrow */
+  { "WRAP",      ">ci L 1 3 14 3 L 1 8 11 8 L 1 13 6 13 ca P 4 11 8 14 8 14 12 9 12 L 9 12 11 10 L 9 12 11 14" },   /* lines with a return arrow */
   { "SPELLING",   "ci B abc cg L 5 12 8 15 L 8 15 14 8" },
   { "WORDCOUNT",  "ci R 1 1 14 14 ca B 123" },
   /* ---- insert */
@@ -72,7 +72,7 @@ static const char *const set[CS_IC_N][2] = {
   { "ZOOMIN",     "ci O 6 6 4 L 9 9 14 14 ca L 4 6 8 6 L 6 4 6 8" },
   { "ZOOMOUT",    "ci O 6 6 4 L 9 9 14 14 ca L 4 6 8 6" },
   { "ZOOM100",    "ci R 3 1 12 15 ca B 1" },
-  { ">PANE",      "ci R 1 2 14 13 ca F 2 3 5 12 cd L 7 5 12 5 L 7 8 12 8 L 7 11 10 11" },          /* a window with a side pane */
+  { "PANE",      ">ci R 1 2 14 13 ca F 2 3 5 12 cd L 7 5 12 5 L 7 8 12 8 L 7 11 10 11" },          /* a window with a side pane */
   { "STATUSBAR",  "ci R 1 2 14 13 ca F 2 10 13 12 cd L 3 5 12 5 L 3 7 10 7" },                    /* a window with a bar along its foot */
   { "RULER",      "ci R 1 5 14 10 L 3 5 3 7 L 6 5 6 8 L 9 5 9 7 L 12 5 12 8" },
   { "LINENUM",    "ca B 1 ci L 7 4 15 4 L 7 8 15 8 L 7 12 13 12 cd L 1 8 4 8 L 1 12 4 12" },

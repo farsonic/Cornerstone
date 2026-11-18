@@ -1,0 +1,56 @@
+; $VER: Install-Jotter 1.0 (18.11.2026)
+;
+; Installer script for Jotter, Cornerstone's example program. It copies the Jotter drawer (the
+; program, its Fonts drawer, the README, the licence and the example document) to a drawer of
+; your choice; the source code only if you ask for it. Written for the Commodore/Amiga Installer
+; V43 language, kept to what InstallerLG and AROS's Installer do the same way
+; (docs/platforms/amiga/14-installer.md: no procedure, no select for values, no (and ...), one
+; action per if, sources through #src). SPDX-License-Identifier: GPL-2.0-only
+
+; the drawer this script is in: Workbench may start Installer with another current
+; directory, so sources are found through the icon's path (#src)
+(if (= @icon "") (set #src "") (set #src (pathonly @icon)))
+
+(set #version "1.0")
+(if (= @app-name "") (set @app-name "Jotter"))
+
+(welcome
+  (cat "Jotter " #version "\n\n"
+       "A plain-text editor laid out with a ribbon, a File page and an outline pane, "
+       "in English, German, French, Spanish and Italian. It needs AmigaOS 3.0 or later and MUI 3.8 "
+       "(or AROS or MorphOS with Zune)."))
+
+; MUI is there?
+(set #mui (/ (getversion "muimaster.library" (resident)) 65536))
+(if (= #mui 0) (set #mui (/ (getversion "LIBS:muimaster.library") 65536)))
+(if (< #mui 19)
+  (message "Jotter needs MUI 3.8 or later (muimaster.library 19), which wasn't found. You can install Jotter now and MUI later."))
+
+(set #dest
+  (askdir
+    (prompt "Where should the Jotter drawer go? (A drawer called Jotter is made there.)")
+    (help @askdir-help)
+    (default "SYS:Utilities")))
+(set #dest (tackon #dest "Jotter"))
+(if (not (exists #dest (noreq))) (makedir #dest (infos)))
+
+(set #parts
+  (askoptions
+    (prompt "What do you want to install?")
+    (help (cat "Jotter and its fonts are needed. The source code is for programmers: it shows how "
+               "the program is built on Cornerstone's kit.\n\n" @askoptions-help))
+    (choices "Jotter, its fonts and the example document" "The source code")
+    (default 1)))
+
+(if (IN #parts 0)
+  (copyfiles (prompt "Copying Jotter") (help @copyfiles-help) (source (tackon #src "Jotter")) (dest #dest) (infos)))
+(if (IN #parts 0)
+  (copyfiles (prompt "Copying the documents") (help @copyfiles-help) (source #src) (dest #dest)
+             (choices "README.md" "LICENSE" "Welcome.txt") (infos)))
+(if (IN #parts 0)
+  (copyfiles (prompt "Copying Jotter's fonts") (help @copyfiles-help) (source (tackon #src "Fonts")) (dest (tackon #dest "Fonts")) (all) (infos)))
+(if (IN #parts 1)
+  (copyfiles (prompt "Copying the source code") (help @copyfiles-help) (source (tackon #src "Source")) (dest (tackon #dest "Source")) (all) (infos)))
+
+(set @default-dest #dest)
+(exit (cat "Jotter is installed in " #dest ". Double-click its icon to start it."))

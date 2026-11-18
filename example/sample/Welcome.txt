@@ -1,0 +1,23 @@
+# Welcome to Jotter
+
+Jotter is Cornerstone's example program: a plain-text editor laid out the way the family's
+programs are. Everything on its ribbon is also in the menus, and every command can be found
+by typing in the Tell Me box.
+
+## Things to try
+
+- Click the File tab for the File page: Info, Open, Save and Options.
+- Press F10 (or Alt) to see a letter on every tab, then on every tool.
+- Type a few words in the Tell Me box and press Return.
+- Make a line a heading with Insert > Heading: it shows in the Outline pane.
+- Right-click the text for its menu.
+
+## Keys
+
+Cursor keys move, Shift selects, Alt moves by words (with up and down: to the top and the end).
+Amiga-Z takes back the last change, Amiga-Y does it again.
+
+### Notes
+
+Jotter reads and writes plain text in Latin-1, and reads UTF-8 too. Lines can end in LF or in
+CR LF: a file keeps the ends it had.

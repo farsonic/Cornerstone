@@ -1,0 +1,17 @@
+# Cornerstone's native tests: the kit's own (kit/shared/tests), then Jotter's (the example: its
+# interface words, its core and its interface data with ASan/UBSan, the 640x480 fit checks), the
+# icon sheet's build and the Installer script check. The vbcc build needs the Amiga toolchain,
+# which GitHub's runners don't have (CLAUDE.md says where it is run).
+name: tests
+on:
+  push:
+  pull_request:
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pillow (icon sheet, Workbench icons, fit checks)
+        run: python3 -m pip install --user pillow
+      - name: Native tests
+        run: TMP=$RUNNER_TEMP sh tools/test.sh
