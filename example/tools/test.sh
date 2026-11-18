@@ -17,3 +17,6 @@ $CC core/*.c ui/*.c "$KIT"/shared/cs_*.c tests/coretest.c -o "$T/jotter_coretest
 # the fit at 640x480 with the real screen font: the ribbon in every language, the menus
 python3 "$KIT/amiga/tools/ribbonfit.py" | tail -1
 python3 "$KIT/amiga/tools/langfit.py" | tail -1
+# the gap document's counts as gapcount.py makes them
+cp docs/notepad-gap.md "$T/jotter_gap.md" && python3 "$KIT/shared/tools/gapcount.py" "$T/jotter_gap.md" --write > /dev/null
+cmp -s docs/notepad-gap.md "$T/jotter_gap.md" && echo "gapcount: docs/notepad-gap.md is up to date" || { echo "gapcount: recount docs/notepad-gap.md"; exit 1; }
