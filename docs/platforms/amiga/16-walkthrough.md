@@ -25,6 +25,7 @@ section links to one and says what to look for in it.
 | [`tools/Install-Jotter`](../../../example/tools/Install-Jotter) | 56 | the Installer script |
 | [`tools/package.sh`](../../../example/tools/package.sh) | 32 | the package |
 | [`tools/emucheck.sh`](../../../example/tools/emucheck.sh) | | the emulator check and its screenshots |
+| [`docs/notepad-gap.md`](../../../example/docs/notepad-gap.md) | 50 | the gap document, against a plain-text editor's usual commands (the tests recount it) |
 | `sample/Welcome.txt`, `README.md` | 23, 38 | the example document, the program's README |
 
 About 2,400 lines of Jotter's own, on about 5,000 of the kit's.
