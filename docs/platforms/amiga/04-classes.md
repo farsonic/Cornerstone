@@ -106,7 +106,11 @@ flags every class needs), `CS_CLASS_COMMON(T)` (the Setup, Cleanup, Show and Hid
 - **Pass on what you don't handle**: `return DoSuperMethodA(cl, obj, msg)`. Where Area must see a
   method too (`OM_SET`, `MUIM_Cleanup`, `MUIM_Show`), `break` instead of returning.
 - **Only draw in `MUIM_Draw`.** To redraw, `MUI_Redraw(obj, MADF_DRAWOBJECT)`; never draw from an
-  event directly, and **never while hidden** (a pane page not in front has no place on the window
+  event directly. For a hover or a press, redraw only what changed: note the part in the instance
+  data and ask `MUI_Redraw(obj, MADF_DRAWUPDATE)`, and let `MUIM_Draw` draw just that part when
+  `MADF_DRAWUPDATE` comes with one noted (the ribbon's `redraw_part`, Dispatch's rail). Redrawing a
+  whole ribbon or rail at every mouse move paints its background and then everything over it, which
+  shows as a flash; and **never while hidden** (a pane page not in front has no place on the window
   and would draw over something else): every class keeps `shown` from `MUIM_Show`/`MUIM_Hide`.
 - **Draw inside `_mleft.._mright`, `_mtop.._mbottom`**; `_rp(obj)`, `_screen`, `_win`, `_window`,
   `_app` are valid between Setup and Cleanup.
@@ -126,8 +130,11 @@ flags every class needs), `CS_CLASS_COMMON(T)` (the Setup, Cleanup, Show and Hid
 - **Later**: inside an event, `DoMethod(_app(obj), MUIM_Application_PushMethod, target, n, ...)`
   runs a method after the current input; use it when acting now would close the thing being
   clicked (a pop-up list's own choice).
-- **`MUIA_FillArea, FALSE`** on a class that paints every pixel (the document view), or MUI clears
-  it first and it flickers. **`MUIA_ShortHelp, " "`** on a class that gives bubbles.
+- **`MUIA_FillArea, FALSE`** on a class that paints every pixel (the document view, the ribbon), or
+  MUI clears it first and it flickers. `cs_new_nofill(cl, obj, msg)` (`cs_classes.c`) in place of
+  OM_NEW's `DoSuperMethodA` sets it inside the class, so no caller can forget it. A part that clears
+  its own background before drawing (the ribbon's tab strip) goes through `cs_buffer.c` and is
+  shown in one blit. **`MUIA_ShortHelp, " "`** on a class that gives bubbles.
 
 ---
 

@@ -28,6 +28,7 @@ What the family has hit, so the next program doesn't.
 | An object draws over another pane | drawing while hidden | the `shown` flag from Show/Hide, checked before every redraw |
 | A class never gets bubble requests | no `MUIA_ShortHelp` | `MUIA_ShortHelp, " "` |
 | The document view flickers | Area clears the background before Draw | `MUIA_FillArea, FALSE` |
+| A ribbon or side rail flashes as the pointer moves over it | the whole object redrawn at every hover: Area's background, then the class's own | `cs_new_nofill` in OM_NEW, and `MADF_DRAWUPDATE` of just the changed part (seen in Dispatch, as in Riptide's first windows) |
 | Dark-theme dialogs: invisible labels | MUI's labels are black | `CsLabel`, `CsTitle` |
 | Setting a gadget triggers your own handler | `set()` fires notifications | `nnset()` |
 | A dialog never opens on Zune | no Radio class (some Zune versions) | `cs_radio()` falls back to a cycle gadget |

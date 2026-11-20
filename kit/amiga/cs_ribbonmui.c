@@ -47,6 +47,8 @@ typedef struct {
   UWORD lastkey;
   int vis[CS_RB_MAXTABS];                      /* the tabs visible at the last layout */
   UBYTE st[CS_RB_MAXITEMS];                    /* each item's state when last drawn */
+  CsBuffer buf;                                /* the tab strip is drawn here and shown in one blit */
+  int upkind, upk;                             /* the part MADF_DRAWUPDATE draws (upkind 0: all of it) */
 } RData;
 static struct MUI_CustomClass *rcls;
 
@@ -149,9 +151,11 @@ static void draw_item(RData *d, Object *obj, int k)
     }
   }
 }
+/* the tab strip: File, the tabs, the quick access buttons and Tell Me, drawn off screen (cs_buffer.c)
+   and shown in one blit, since its background is filled first and a hover redraws it all */
 static void draw_tabs(RData *d, Object *obj)
 {
-  struct RastPort *rp = _rp(obj);
+  struct RastPort *rp = cs_buf_begin(&d->buf, obj);
   CsRbLayout *l = d->l;
   LONG th = cs_rb_tabh(fh());
   int t, i;
@@ -190,6 +194,7 @@ static void draw_tabs(RData *d, Object *obj)
     cs_icon(rp, CS_IC_SEARCH, cs_rtl ? BX1(*b) - 17 : BX(*b) + 3, BY(*b) + (b->y1 - b->y0 + 1 - 14) / 2, 14, 0);
     if (b->x1 - b->x0 > 40) cs_text_fit(rp, cs_font(), cs_rtl ? BX(*b) + 4 : BX(*b) + 21, BY(*b) + (b->y1 - b->y0 + 1 - fh()) / 2, "Tell me", b->x1 - b->x0 - 24, cs_pen(CS_T_DIM));
   }
+  cs_buf_show(&d->buf, obj, _mleft(obj), _mtop(obj), _mright(obj), _mtop(obj) + th + 1);
 }
 static void kt_badge(struct RastPort *rp, LONG cx, LONG y, const char *code, int dim)
 {
@@ -333,6 +338,26 @@ static void press(RData *d, Object *obj, int kind, int k)
   else send(obj, d, it->id, -1);
 }
 static void redraw(Object *obj) { MUI_Redraw(obj, MADF_DRAWOBJECT); }
+/* one part drawn again after the hover or a press moved: the tab strip (File, a tab, the quick
+   access buttons, Tell Me) or one item, each painting its whole box. Redrawing the whole ribbon at
+   every mouse move painted its background and then everything over it, which made it flash (as
+   Riptide's first windows did); Quill's ribbon draws only what changed for the same reason. The
+   drawing itself happens in MUIM_Draw (MADF_DRAWUPDATE with upkind/upk saying what) */
+static void draw_part(RData *d, Object *obj, int kind, int k)
+{
+  if (kind >= CS_HIT_FILE && kind <= CS_HIT_TELL) draw_tabs(d, obj);
+  else if (kind >= CS_HIT_ITEM && !d->minimised && k >= 0 && k < d->l->nitem) draw_item(d, obj, k);
+  else return;
+  if (d->kt) kt_draw(d, obj);                            /* the KeyTips stay on top */
+}
+static void redraw_part(RData *d, Object *obj, int kind, int k)
+{
+  if (!d->shown || !_win(obj) || kind == CS_HIT_NONE) return;
+  if (d->dirty || d->width != _mwidth(obj) || d->ox != _mleft(obj) || d->oy != _mtop(obj)) { redraw(obj); return; }
+  d->upkind = kind; d->upk = k;
+  MUI_Redraw(obj, MADF_DRAWUPDATE);
+  d->upkind = CS_HIT_NONE;
+}
 static void kt_stop(RData *d, Object *obj) { if (d->kt) { d->kt = 0; d->ktyped[0] = 0; redraw(obj); } }
 /* a key while the KeyTips are shown: 1 if it was theirs */
 static int kt_key(RData *d, Object *obj, int c)
@@ -397,7 +422,7 @@ CS_DISPATCHER(rdispatch)
   switch (msg->MethodID) {
   case OM_NEW: {
     struct TagItem *tags = ((struct opSet *)msg)->ops_AttrList;
-    if (!(obj = (Object *)DoSuperMethodA(cl, obj, msg))) return 0;
+    if (!(obj = (Object *)cs_new_nofill(cl, obj, msg))) return 0;
     d = INST_DATA(cl, obj);
     memset(d, 0, sizeof *d);
     d->def = (const CsRibbonDef *)GetTagData(MUIA_CsRibbon_Def, 0, tags);
@@ -442,11 +467,22 @@ CS_DISPATCHER(rdispatch)
     CS_MINMAX(msg, 200, 640, MUI_MAXMAX, h, h, h);
     return 0;
   }
-  CS_CLASS_COMMON(RData);
+  case MUIM_Setup:
+    if (!DoSuperMethodA(cl, obj, msg)) return FALSE;
+    cs_theme_setup(obj);
+    cs_theme_handler(obj, &((RData *)INST_DATA(cl, obj))->ehn);
+    return TRUE;
+  case MUIM_Cleanup:
+    cs_buf_free(&((RData *)INST_DATA(cl, obj))->buf);  /* made like the screen's bitmap: gone with it */
+    cs_theme_cleanup(obj);
+    break;
+  case MUIM_Show: ((RData *)INST_DATA(cl, obj))->shown = 1; break;
+  case MUIM_Hide: ((RData *)INST_DATA(cl, obj))->shown = 0; break;
   case MUIM_Draw:
     DoSuperMethodA(cl, obj, msg);
     d = INST_DATA(cl, obj);
-    if (((struct MUIP_Draw *)msg)->flags & (MADF_DRAWOBJECT | MADF_DRAWUPDATE)) draw_all(d, obj);
+    if ((((struct MUIP_Draw *)msg)->flags & MADF_DRAWUPDATE) && d->upkind != CS_HIT_NONE) draw_part(d, obj, d->upkind, d->upk);
+    else if (((struct MUIP_Draw *)msg)->flags & (MADF_DRAWOBJECT | MADF_DRAWUPDATE)) draw_all(d, obj);
     return 0;
   case MUIM_CsRibbon_Refresh: {
     int t, k, changed = 0;
@@ -531,7 +567,12 @@ CS_DISPATCHER(rdispatch)
     kind = hit(d, obj, im->MouseX, im->MouseY, &k);
     if (im->Class == IDCMP_MOUSEMOVE) {
       int hk = kind == CS_HIT_ARROW ? CS_HIT_ITEM : kind;
-      if (hk != d->hotkind || k != d->hot) { d->hotkind = hk; d->hot = k; redraw(obj); }
+      if (hk != d->hotkind || k != d->hot) {
+        int ok = d->hotkind, oi = d->hot;
+        d->hotkind = hk; d->hot = k;
+        redraw_part(d, obj, ok, oi);
+        if (!(ok >= CS_HIT_FILE && ok <= CS_HIT_TELL && hk >= CS_HIT_FILE && hk <= CS_HIT_TELL)) redraw_part(d, obj, hk, k);
+      }
       return 0;
     }
     if (im->Class != IDCMP_MOUSEBUTTONS) return 0;
@@ -547,7 +588,7 @@ CS_DISPATCHER(rdispatch)
         return MUI_EventHandlerRC_Eat;
       }
       d->presskind = kind == CS_HIT_ARROW ? CS_HIT_ITEM : kind; d->press = k;
-      redraw(obj);
+      redraw_part(d, obj, d->presskind, k);
       if (kind == CS_HIT_GROUP || kind == CS_HIT_ARROW || (kind == CS_HIT_ITEM && d->l->it[k]->kind == CSK_DROP)) {
         d->presskind = 0; d->press = -1;
         press(d, obj, kind, k);                          /* lists open on the press */
@@ -557,7 +598,7 @@ CS_DISPATCHER(rdispatch)
     if (im->Code == SELECTUP && d->presskind) {
       int pk = d->presskind, pi = d->press, same = (kind == CS_HIT_ARROW ? CS_HIT_ITEM : kind) == pk && k == pi;
       d->presskind = 0; d->press = -1;
-      redraw(obj);
+      redraw_part(d, obj, pk, pi);
       if (same) press(d, obj, kind, k);
       return MUI_EventHandlerRC_Eat;
     }

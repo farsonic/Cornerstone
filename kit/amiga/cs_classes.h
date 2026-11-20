@@ -82,6 +82,10 @@ struct MUI_CustomClass *cs_backstage_class(void);
 void cs_tellme_open(Object *ribbon);           /* ribbon: commands on it are opened there (lists) */
 void cs_tellme_free(void);
 
+/* OM_NEW's DoSuperMethodA for a class that paints its whole box: MUIA_FillArea FALSE, so MUI doesn't
+   clear it to the background before every draw (which flickers) */
+ULONG cs_new_nofill(struct IClass *cl, Object *obj, Msg msg);
+
 /* ---- the off-screen buffer of a document view (cs_buffer.c): drawn into, shown in one blit,
    scrolled with the blitter (ScrollRaster) so only the strip that comes into view is drawn */
 typedef struct CsBuffer {
